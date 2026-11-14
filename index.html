@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>だれでもMC v3.0</title>
+    <title>だれでもMC v3.2.2</title>
     
 
     <!-- アプリアイコンの設定 -->
@@ -11,7 +11,7 @@
     <link rel="icon" href="apple-touch-icon.png">
 
     <!-- iOSホーム画面でのアプリ名の指定 -->
-    <meta name="apple-mobile-web-app-title" content="だれでもMC v3.0">
+    <meta name="apple-mobile-web-app-title" content="だれでもMC v3.2.2">
     
     <style>
         /* 全体の設定 */
@@ -642,6 +642,8 @@
 
 @media(min-width:600px) and (max-width:900px){#recording-area{grid-template-columns:repeat(3,minmax(0,1fr))}.rec-controls{grid-template-columns:1fr 1fr 1fr 40px}.rec-controls .btn-rec,.rec-controls .btn-delete,.rec-controls .btn-play,.rec-controls .btn-file-load{grid-column:auto;grid-row:auto}}
 
+.brand .brand-version{font-size:10px;font-weight:600;letter-spacing:0;color:var(--muted);vertical-align:middle}
+
 /* Child-operated MC stage: bright, tactile, and one clear next character. */
 #app-screen{isolation:isolate;overflow:hidden;background:#c9efff;background-image:linear-gradient(180deg,#b8eaff 0%,#e8f9ff 75%,#fff7db 100%);color:#204c72;padding:24px 28px calc(22px + env(safe-area-inset-bottom));gap:0}
 #app-screen::before,#app-screen::after{content:"";position:absolute;z-index:-1;pointer-events:none;border-radius:50%}#app-screen::before{width:65vw;height:240px;left:-14vw;bottom:-175px;background:#a9df8d;transform:rotate(8deg)}#app-screen::after{width:65vw;height:230px;right:-15vw;bottom:-170px;background:#c9eaa0;transform:rotate(-9deg)}
@@ -752,14 +754,78 @@
 @media(max-width:700px){#completion-screen{padding:20px 2px}.completion-card{padding:34px 16px 37px;border-radius:24px}.completion-card h1{font-size:24px}.completion-card p{font-size:17px;margin-top:9px}.completion-mark{width:90px;height:90px;margin-bottom:20px}.completion-mark svg{width:54px;height:54px}#setup-screen .hint-option{font-size:10px;margin-top:10px}#setup-screen .hint-default{font-size:9px}}
 @media(max-height:500px) and (orientation:landscape){.completion-card{padding:20px}.completion-mark{height:65px;width:65px;margin-bottom:12px}.completion-mark svg{height:40px;width:40px}.completion-card h1{font-size:24px}.completion-card p{font-size:16px;margin-top:7px}}
 
-.brand .brand-version{font-size:10px;font-weight:600;letter-spacing:0;color:var(--muted);vertical-align:middle}
+/* Page title only. The script remains the focus of the child-operated screen. */
+#app-screen #header-area{display:grid;grid-template-columns:minmax(0,1fr) auto;min-height:0;align-items:center;gap:12px;margin:0 55px 14px;flex-shrink:0}
+#app-screen #agenda-title{max-width:100%;justify-self:center;margin:0}
+#app-screen #page-position{position:static;align-self:center;white-space:nowrap}
+/* Fit the actual remaining rectangle, including music labels and word spacing. */
+#app-screen #char-container{--character-size:112px;--character-height:116px;--character-font:58px;--character-small-font:44px;--character-long-font:34px;--character-gap:18px;--character-radius:22px;padding:20px 16px 16px;gap:var(--character-gap);align-content:center;scroll-padding:28px;overflow-x:hidden;overflow-y:auto}
+#app-screen #char-container .char-btn{flex:0 0 auto;width:var(--character-size);height:var(--character-height);min-height:0;font-size:var(--character-font);border-radius:var(--character-radius)}
+#app-screen #char-container .char-btn.small-text{font-size:var(--character-small-font)}
+#app-screen #char-container .char-btn.long-text{width:auto;min-width:var(--character-size);max-width:100%;height:auto;min-height:var(--character-height);padding:8px 14px;font-size:var(--character-long-font);line-height:1.3;white-space:normal;overflow-wrap:anywhere}
+#app-screen #char-container .char-btn.empty{width:calc(var(--character-size) * .32);min-width:0;pointer-events:none}
+#app-screen #char-container.layout-scroll{align-content:flex-start}
+#app-screen .nav-btn:disabled{opacity:.45;cursor:default;transform:none}
+#setup-screen .navigation-lock-option{margin-top:8px}
+@media(max-width:700px){#app-screen #header-area{grid-template-columns:minmax(0,1fr);justify-items:center;gap:6px;margin:0 43px 12px}#app-screen #agenda-title{font-size:20px;padding:8px 13px}#app-screen #page-position{position:static}#app-screen #char-container{padding:20px 12px 16px}}
+@media(max-height:550px) and (orientation:landscape){#app-screen #header-area{grid-template-columns:minmax(0,1fr) auto;gap:10px;margin-bottom:12px}#app-screen #agenda-title{font-size:17px;padding:5px 13px}}
+#app-screen[data-char-hint="on"] #char-container{padding-top:32px;row-gap:30px}
+
+/* Reading progress changes colors/state only. No moving, shrinking, or reflow. */
+#app-screen #char-container .char-btn,
+#app-screen #char-container .char-btn.current,
+#app-screen #char-container .char-btn.done,
+#app-screen #char-container .char-btn.playing,
+#app-screen #char-container .char-btn:active{transform:none;border-width:4px;transition:background-color .15s,color .15s,border-color .15s}
+#app-screen #char-container .char-label{display:block;min-width:0;max-width:100%;pointer-events:none}
+#app-screen #char-container[data-layout-ready="false"]{visibility:hidden}
+/* Yellow always means the next action, never an action that is already finished. */
+#app-screen #btn-next,
+#app-screen:not(.stage-complete) #btn-next{background:#e3e8ec!important;color:#596979;border-color:#c3cdd5;box-shadow:0 6px 0 #a5b1bb;opacity:1}
+#app-screen #btn-next:disabled{background:#e3e8ec!important;color:#596979;border-color:#c3cdd5;box-shadow:0 6px 0 #a5b1bb;opacity:.6}
+#app-screen.stage-complete #btn-next:not(:disabled){background:#ffdd57!important;color:#15356a;border-color:#fff2ad;box-shadow:0 6px 0 #bf8b23;opacity:1}
+#setup-screen .theme-choice .thumb-next{background:#e3e8ec;color:#596979}
+#app-screen #btn-next{transition:none}
+
+#app-screen #char-container .char-btn.done:not(:disabled){cursor:pointer}
+#setup-screen .start-page-field{display:flex;align-items:center;gap:8px;flex:1;min-width:0;max-width:550px;font-size:11px;color:var(--ink)}
+#setup-screen .start-page-field>span{flex-shrink:0}
+#setup-screen #start-page-select{width:100%;min-width:0;max-width:390px;padding:4px 7px;line-height:1.25;font:inherit;color:var(--ink);background:#fff;border:1px solid #bfcdc4;border-radius:6px}
+@media(max-width:600px){#setup-screen .action-area{flex-wrap:wrap;row-gap:5px}#setup-screen .start-page-field{flex:1 0 100%;max-width:none;font-size:10px;gap:7px}#setup-screen #start-page-select{max-width:none;padding:3px 6px;font-size:11px}#setup-screen .btn-save{flex:1}#setup-screen .btn-start{flex:1.6}}
+
+#recording-editor{width:min(760px,calc(100vw - 24px));max-width:760px;max-height:calc(100dvh - 24px);padding:16px;border-radius:12px;overflow:auto;color:#243d3a;box-shadow:0 20px 80px #18362f40}
+#recording-editor::backdrop{background:#203d3a80;backdrop-filter:blur(3px)}
+.recording-editor-header{display:flex;align-items:center;gap:9px;margin-bottom:7px}.recording-editor-header h2{font-size:16px;line-height:1.4;margin:0}.recording-editor-header>span:first-child{background:#eaf3ed;color:#216b56;font-size:22px;line-height:1.2;font-weight:700;padding:3px 8px;border-radius:6px;max-width:45%;overflow-wrap:anywhere}.recording-editor-header>span:last-child{margin-left:auto;font-size:11px;color:#667a75;white-space:nowrap;font-variant-numeric:tabular-nums}
+#recording-editor-status{font-size:12px;line-height:1.5;color:#536c61;min-height:18px;margin:0 0 9px}.recording-wave-wrap{position:relative;border:1px solid #c7d7cc;border-radius:8px;overflow:hidden;background:#f9fbf8}#recording-wave{display:block;width:100%;height:160px;touch-action:none;cursor:ew-resize}#recording-countdown{position:absolute;inset:0;background:#f8fbf4e8;display:grid;place-items:center;color:#216b56;font-size:64px;font-weight:800;pointer-events:none}
+.recording-trim-fields{display:flex;align-items:center;flex-wrap:wrap;gap:9px 16px;margin-top:9px}.recording-trim-fields label{display:flex;align-items:center;gap:5px;font-size:11px;color:#435b50}.recording-trim-fields input{width:91px;font-size:16px;line-height:1.25;padding:3px 6px;border:1px solid #b8cbbb;border-radius:5px;background:#fff;color:#243d3a;font-variant-numeric:tabular-nums}.recording-trim-fields>span{font-size:11px;color:#536c61;margin-left:auto;font-variant-numeric:tabular-nums}.recording-edit-hint{font-size:10px!important;line-height:1.6!important;color:#667a75!important;margin:7px 0 10px!important}
+.recording-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap}#recording-editor button{height:auto;min-height:0;padding:5px 8px;line-height:1.3;font-size:12px;border:1px solid #becfc2;border-radius:6px;background:#fff;color:#294b3e;font-weight:600}#recording-editor button:disabled{opacity:.4;cursor:default}#recording-editor #recording-stop{background:#b84738;color:white;border-color:#b84738}#recording-editor #recording-preview{background:#edf5ee}#recording-editor #recording-confirm{background:#216b56;border-color:#216b56;color:#fff;min-width:55px}#recording-editor-error{font-size:11px;color:#a72e26;line-height:1.6;margin:8px 0 0}#recording-editor-error:empty{display:none}.recording-editor-footer{display:flex;align-items:center;justify-content:flex-end;gap:7px;margin-top:13px;padding-top:11px;border-top:1px solid #dce5df}.recording-editor-footer>span{font-size:10px;color:#667a75;margin-right:auto;line-height:1.6}
+@media(max-width:600px){#recording-editor{padding:12px;width:calc(100vw - 16px);max-height:calc(100dvh - 16px);border-radius:10px}.recording-editor-header h2{font-size:14px}.recording-editor-header>span:first-child{font-size:20px;max-width:40%}#recording-wave{height:125px}#recording-editor-status{font-size:11px}.recording-trim-fields{gap:7px 10px}.recording-trim-fields input{width:77px}.recording-trim-fields>span{margin-left:0;font-size:10px}.recording-tools{gap:5px}#recording-editor button{font-size:11px;padding:4px 6px}.recording-editor-footer{flex-wrap:wrap;margin-top:11px;padding-top:9px}.recording-editor-footer>span{flex:1 0 100%;font-size:9px}}
+@media(max-height:500px) and (orientation:landscape){#recording-editor{padding:10px}#recording-wave{height:90px}.recording-edit-hint{margin:4px 0 6px!important}.recording-editor-footer{margin-top:8px;padding-top:7px}}
+
+@media(max-width:360px){#setup-screen .brand{font-size:15px}#setup-screen .brand-version{font-size:8px}}
+#recording-editor[open]{display:flex;flex-direction:column;overflow:hidden}
+.recording-editor-header,#recording-editor-status,.recording-transport,.recording-editor-footer{flex-shrink:0}
+.recording-editor-body{overflow-y:auto;min-height:0;padding-right:2px}
+.recording-transport{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-bottom:9px}
+#recording-editor #recording-start{background:#b84738;border-color:#b84738;color:white}
+#recording-quality{font-size:10px;color:#667a75;margin-left:auto;white-space:nowrap}
+.recording-meter-panel{padding:7px 9px;border:1px solid #d7e2d8;border-radius:7px;background:#f7faf5;margin-bottom:9px}
+.recording-meter-line{display:flex;align-items:center;gap:7px;margin:3px 0;font-size:10px;line-height:1.3}.recording-meter-line>span{width:65px;flex-shrink:0}.recording-meter-line>output{width:75px;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;color:#53685c}
+.recording-meter{height:10px;position:relative;flex:1;background:#e0e7df;border-radius:3px;overflow:hidden;min-width:45px}
+.recording-meter-fill{display:block;height:100%;width:0;background:#39815e;transition:width .06s linear}.recording-meter>i{position:absolute;top:0;bottom:0;left:0;width:2px;background:#294f40}
+.recording-control-line{display:flex;align-items:center;gap:7px;margin:7px 0 2px;font-size:11px}.recording-control-line>label{flex-shrink:0;min-width:65px}.recording-control-line input[type=range]{flex:1;min-width:40px;width:auto;margin:0;accent-color:#216b56;height:18px}.recording-control-line>output{min-width:65px;text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-size:10px;color:#53685c}.recording-control-line>button{flex-shrink:0}
+#recording-input-warning{font-size:10px;line-height:1.5;color:#a63e30;margin:5px 0 0;min-height:0}#recording-input-warning:empty{display:none}
+.recording-adjustments{border-top:1px solid #dce5df;margin-top:10px;padding-top:3px}.recording-adjustment-info{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:7px 0 10px}.recording-adjustment-info>span{font-size:10px;line-height:1.5;color:#667a75}.recording-control-hint{font-size:10px!important;color:#667a75!important;line-height:1.5!important;margin:6px 0 0!important}
+.recording-editor-footer{background:white}
+@media(max-width:600px){.recording-meter-panel{padding:6px}.recording-meter-line{font-size:9px;gap:5px}.recording-meter-line>span{width:55px}.recording-meter-line>output{width:68px;font-size:9px}.recording-control-line{font-size:10px;gap:5px}.recording-control-line>label{min-width:55px}.recording-control-line>output{min-width:58px;font-size:9px}.recording-control-line>button{font-size:9px!important;padding:3px 4px!important}#recording-quality{font-size:9px}.recording-transport{margin-bottom:7px;gap:5px}.recording-adjustment-info{gap:5px}.recording-control-hint{font-size:9px!important}}
+
 </style>
 </head>
 <body>
 
     <div id="setup-screen">
       <header class="setup-header">
-        <a class="brand" href="#" aria-label="だれでもMC v3.0 ホーム"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="11" y="3" width="10" height="17" rx="5" fill="currentColor"/><path d="M7 14v2a9 9 0 0 0 18 0v-2M16 25v5m-5 0h10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span><span>だれでも<span class="brand-mc">MC</span><span class="brand-version"> v3.0</span></span></a>
+        <a class="brand" href="#" aria-label="だれでもMC v3.2.2 ホーム"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="11" y="3" width="10" height="17" rx="5" fill="currentColor"/><path d="M7 14v2a9 9 0 0 0 18 0v-2M16 25v5m-5 0h10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span><span>だれでも<span class="brand-mc">MC</span><span class="brand-version"> v3.2.2</span></span></a>
         <div class="slot-group"><span class="eyebrow">台本を切り替え</span><div id="slot-container" aria-label="保存した台本"></div></div>
         <button class="help-button" onclick="document.getElementById('usage-guide').showModal()">? <span>使いかた</span></button>
       </header>
@@ -783,16 +849,16 @@
               <div class="progress-track"><div id="recording-progress"></div></div>
               <div class="audio-toolbar"><label class="search-field"><span aria-hidden="true">⌕</span><input id="char-search" type="search" placeholder="文字をさがす" oninput="refreshRecordingOverview()" aria-label="録音する文字を検索"></label><label class="missing-filter"><input type="checkbox" id="missing-only" onchange="refreshRecordingOverview()">未録音だけ</label><span id="visible-count"></span></div>
               <div id="recording-area"></div><p id="audio-empty" class="empty-state" hidden></p>
-              <p class="audio-note"><span>✦</span> 録音した声の前後の無音は、自動でカットします。</p>
+              <p class="audio-note"><span>✦</span> 録音は波形を確認してから決定します。無音カットは編集画面で選べます。</p>
             </section>
-            <section id="images-panel" role="tabpanel" aria-labelledby="tab-images" hidden><div class="audio-heading"><div><h2>ことばに、見える手がかりを。</h2><p>ページごとに写真やイラストを添えられます。</p></div></div><div id="image-settings-area"></div></section><section id="theme-panel" role="tabpanel" aria-labelledby="tab-theme" hidden><div class="audio-heading"><div><h2>この台本の、司会画面。</h2><p>授業や会に合わせて選べます。選んだ見た目は、台本と一緒に保存されます。</p></div></div><div id="theme-choices" role="radiogroup" aria-label="司会画面の見た目"></div><label class="hint-option"><input type="checkbox" id="show-char-hint" onchange="setCharHint(this.checked)"><span>文字の上に「ここ！」を表示する</span><span class="hint-default">初期値：オフ</span></label><div class="theme-preview-action"><span>いまの見た目：<strong id="current-theme-name">黒板</strong></span><button class="theme-try" onclick="startApp()">司会画面で確認する →</button></div><p class="theme-help">選んだら「台本に保存」を押してください。保存済みの台本は、それぞれ選んだ見た目で開きます。<br>以前の台本など、見た目が未設定の場合は「黒板」になります。</p></section>
+            <section id="images-panel" role="tabpanel" aria-labelledby="tab-images" hidden><div class="audio-heading"><div><h2>ことばに、見える手がかりを。</h2><p>ページごとに写真やイラストを添えられます。</p></div></div><div id="image-settings-area"></div></section><section id="theme-panel" role="tabpanel" aria-labelledby="tab-theme" hidden><div class="audio-heading"><div><h2>この台本の、司会画面。</h2><p>授業や会に合わせて選べます。選んだ見た目は、台本と一緒に保存されます。</p></div></div><div id="theme-choices" role="radiogroup" aria-label="司会画面の見た目"></div><label class="hint-option"><input type="checkbox" id="show-char-hint" onchange="setCharHint(this.checked)"><span>文字の上に「ここ！」を表示する</span><span class="hint-default">初期値：オフ</span></label><label class="hint-option navigation-lock-option"><input type="checkbox" id="lock-page-navigation" onchange="setNavigationLock(this.checked)"><span>全ての文字を押すまで「つぎへ・もどる」を無効にする<br><span class="hint-default">「おしまい」も対象</span></span></label><div class="theme-preview-action"><span>いまの見た目：<strong id="current-theme-name">黒板</strong></span><button class="theme-try" onclick="startApp()">司会画面で確認する →</button></div><p class="theme-help">選んだら「台本に保存」を押してください。保存済みの台本は、それぞれ選んだ見た目で開きます。<br>以前の台本など、見た目が未設定の場合は「黒板」になります。</p></section>
           </section>
         </div>
       </main>
-      <footer class="action-area"><div class="footer-note"><span class="footer-symbol">✧</span><span>ひとつずつ、じぶんのペースで。<small>本番では、次に押す文字が光ります。</small></span></div><button class="btn-save" onclick="saveCurrentSlot()">台本<span id="save-btn-slot-label">A</span> に保存</button><button class="btn-start" onclick="startApp()">司会をはじめる <span>→</span></button></footer>
+      <footer class="action-area"><label class="start-page-field" for="start-page-select"><span>開始ページ</span><select id="start-page-select" onchange="setStartPage(this.value)" aria-label="司会を開始するページ"><option value="0">1</option></select></label><button class="btn-save" onclick="saveCurrentSlot()">台本<span id="save-btn-slot-label">A</span> に保存</button><button class="btn-start" onclick="startApp()">司会をはじめる <span>→</span></button></footer>
       <div class="status-msg" id="status-msg" role="status" aria-live="polite"></div>
     </div>
-    <dialog id="usage-guide"><form method="dialog"><button class="dialog-close" aria-label="使いかたを閉じる">×</button></form><span class="eyebrow">だれでもMC v3.0</span><h2>使いかた</h2><ol><li><strong>台本を書く</strong><p>1行が1ページ。「あいさつ：おはよう」のように、見出しと読む文字を分けられます。</p></li><li><strong>声を用意する</strong><p>文字カードの「録音」を押して話し、「停止」で完了。「読込」で音声・動画ファイルも使えます。</p></li><li><strong>保存して、はじめる</strong><p>光っている文字を順に押すと、その声が流れます。音声がない文字は音が出ないので、事前に確認してください。</p></li></ol><p>♪「曲名」と書くと音楽用のボタンになります。音楽は押すたびに再生・停止できます。</p><div class="guide-tip">設定に戻るには、画面の左右上端にある、大きな歯車の左半分と右半分を同時に押します。キーボードではスペースキー、または S キーでも戻れます。</div></dialog>
+    <dialog id="usage-guide"><form method="dialog"><button class="dialog-close" aria-label="使いかたを閉じる">×</button></form><span class="eyebrow">だれでもMC v3.2.2</span><h2>使いかた</h2><ol><li><strong>台本を書く</strong><p>1行が1ページ。「あいさつ：おはよう」のように、見出しと読む文字を分けられます。</p></li><li><strong>声を用意する</strong><p>文字カードの「録音・編集」で音声を開きます。録音済みなら波形・範囲・音量設定を復元し、再編集できます。新しく録音するときはマイクを許可してください。入力メーターとゲインを確認して「録音」を押し、3秒のカウントダウン後に話し、「録音停止」で止めます。波形で範囲を選び、再生して確認してから「決定」を押してください。「キャンセル」では元の音声を保持します。</p></li><li><strong>保存して、はじめる</strong><p>光っている文字を順に押すと、その声が流れます。音声がない文字は音が出ないので、事前に確認してください。</p></li></ol><p>♪「曲名」と書くと音楽用のボタンになります。音楽は押すたびに再生・停止できます。</p><div class="guide-tip">設定に戻るには、画面の左右上端にある、大きな歯車の左半分と右半分を同時に押します。キーボードではスペースキー、または S キーでも戻れます。</div></dialog>
     <!-- アプリ画面 -->
     <div id="app-screen">
         
@@ -800,7 +866,7 @@
         <div id="setting-btn-left" class="secret-setting-btn left" role="button" aria-label="設定の歯車の左半分（右半分と同時に押す）">⚙</div>
         <div id="setting-btn-right" class="secret-setting-btn right" role="button" aria-label="設定の歯車の右半分（左半分と同時に押す）">⚙</div>
 
-        <div class="stage-decoration" aria-hidden="true"><svg class="morning-sun" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="24" fill="currentColor"/><path d="M50 5v9m0 72v9M5 50h9m72 0h9M18 18l7 7m50 50 7 7M18 82l7-7m50-50 7-7" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg><span class="morning-cloud"></span></div><div id="header-area"><div class="stage-heading-label"><svg aria-hidden="true" viewBox="0 0 32 32" fill="none"><rect x="11" y="2" width="10" height="18" rx="5" fill="currentColor"/><path d="M6 14v3a10 10 0 0 0 20 0v-3M16 27v4m-5 0h10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>きょうの しかい</div>
+        <div class="stage-decoration" aria-hidden="true"><svg class="morning-sun" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="24" fill="currentColor"/><path d="M50 5v9m0 72v9M5 50h9m72 0h9M18 18l7 7m50 50 7 7M18 82l7-7m50-50 7-7" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg><span class="morning-cloud"></span></div><div id="header-area">
             <div id="agenda-title">タイトル</div><span id="page-position"></span>
         </div>
         
@@ -809,13 +875,39 @@
             <img id="page-image" src="" alt="視覚支援画像">
         </div>
 
-        <div class="stage-guide" id="stage-guide">ひかる もじを おしてね</div><div id="char-container" aria-label="読む文字"></div><div class="stage-progress-wrap" id="stage-progress-wrap"><div class="stage-meter" aria-hidden="true"><div id="stage-fill"></div></div><div class="stage-progress" id="stage-progress"></div></div>
+        <div id="char-container" aria-label="読む文字"></div><div class="stage-progress-wrap" id="stage-progress-wrap"><div class="stage-meter" aria-hidden="true"><div id="stage-fill"></div></div><div class="stage-progress" id="stage-progress"></div></div>
         <div id="footer-nav">
             <button id="btn-prev" class="nav-btn" onclick="prevPage()">もどる</button>
             <button id="btn-next" class="nav-btn" onclick="nextPage()">つぎへ ▶</button>
         </div>
         <section id="completion-screen" hidden aria-labelledby="completion-title"><div class="completion-card"><div class="completion-mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M15 33l11 11 24-26" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h1 id="completion-title" tabindex="-1">おつかれさまでした</h1><p>しかい、ありがとう。</p></div></section>
     </div>
+
+    <dialog id="recording-editor" aria-labelledby="recording-editor-title" aria-describedby="recording-editor-status">
+      <div class="recording-editor-header"><span id="recording-editor-char"></span><h2 id="recording-editor-title">音声を録音・編集</h2><span id="recording-editor-time">0.00 秒</span></div>
+      <p id="recording-editor-status" role="status" aria-live="polite"></p>
+      <div class="recording-transport"><button id="recording-start" type="button" aria-label="録音を開始">● 録音</button><button id="recording-stop" type="button">■ 録音停止</button><button id="recording-retake" type="button">再録音</button><span id="recording-quality"></span></div>
+      <div class="recording-editor-body">
+        <div class="recording-meter-panel">
+          <div class="recording-meter-line"><span>マイク入力</span><div class="recording-meter" role="meter" id="recording-raw-meter" aria-label="マイク入力レベル" aria-valuemin="-60" aria-valuemax="0" aria-valuenow="-60"><span class="recording-meter-fill" id="recording-raw-fill"></span><i id="recording-raw-peak"></i></div><output id="recording-raw-db">−∞ dBFS</output></div>
+          <div class="recording-meter-line"><span>録音レベル</span><div class="recording-meter" role="meter" id="recording-input-meter" aria-label="ゲイン調整後の録音レベル" aria-valuemin="-60" aria-valuemax="0" aria-valuenow="-60"><span class="recording-meter-fill" id="recording-input-fill"></span><i id="recording-input-peak"></i></div><output id="recording-input-db">−∞ dBFS</output></div>
+          <div class="recording-control-line"><label for="recording-input-gain">入力ゲイン</label><input id="recording-input-gain" type="range" min="-24" max="12" step="0.5" value="-6"><output id="recording-input-gain-value">−6.0 dB</output><button id="recording-input-reset" type="button">0 dB</button></div>
+          <p id="recording-input-warning" role="status"></p>
+        </div>
+        <div class="recording-wave-wrap"><canvas id="recording-wave" role="img" aria-label="録音した音声の波形。開始と終了は下の数値でも変更できます。"></canvas><div id="recording-countdown" aria-live="assertive" hidden>3</div></div>
+        <div class="recording-trim-fields"><label>開始 <input id="recording-trim-start" type="number" min="0" step="0.001" inputmode="decimal" aria-label="トリミング開始秒">秒</label><label>終了 <input id="recording-trim-end" type="number" min="0" step="0.001" inputmode="decimal" aria-label="トリミング終了秒">秒</label><span id="recording-selection-length"></span></div>
+        <p class="recording-edit-hint">波形の両端をドラッグするか、開始・終了秒を入力して範囲を選びます。</p>
+        <div class="recording-tools"><button id="recording-preview" type="button">▶ 選択範囲を再生</button><button id="recording-auto-trim" type="button">前後の無音を自動カット</button><button id="recording-reset-trim" type="button">全範囲</button></div>
+        <div class="recording-adjustments">
+          <div class="recording-control-line"><label for="recording-output-gain">保存音量</label><input id="recording-output-gain" type="range" min="-24" max="24" step="0.5" value="0"><output id="recording-output-gain-value">0.0 dB</output><button id="recording-output-reset" type="button">0 dB</button></div>
+          <div class="recording-adjustment-info"><button id="recording-normalize" type="button">ノーマライズ（−3 dB）</button><span id="recording-output-info"></span></div>
+          <div class="recording-control-line"><label for="recording-silence-level">無音の基準</label><input id="recording-silence-level" type="range" min="-70" max="-15" step="1" value="-40"><output id="recording-silence-value">−40 dBFS</output><button id="recording-noise-calibrate" type="button">環境音を測定</button></div>
+          <p class="recording-control-hint">無音の基準を右へ動かすと環境音をカットしやすくなります。弱い声も切れやすくなるため、試聴して確認してください。</p>
+        </div>
+        <p id="recording-editor-error" role="alert"></p>
+      </div>
+      <div class="recording-editor-footer"><span>「決定」するまで元の音声は変わりません。</span><button id="recording-cancel" type="button">キャンセル</button><button id="recording-confirm" type="button">決定</button></div>
+    </dialog>
 
     <!-- カスタムモーダル -->
     <div id="custom-modal" class="modal-overlay" style="display:none;">
@@ -1008,15 +1100,17 @@
                 });
             },
 
-            saveSlot: async function(slotId, name, text, audioMap, imageMap, theme = 'blackboard', showCharHint = false) {
+            saveSlot: async function(slotId, name, text, audioMap, imageMap, theme = 'blackboard', showCharHint = false, lockNavigation = false, edits = {}) {
                 const data = {
                     id: slotId,
                     name: name,
                     text: text,
                     audio: audioMap,
+                    audioEdits: edits,
                     images: imageMap || {},
                     theme: normalizeStageTheme(theme),
-                    showCharHint: showCharHint === true, 
+                    showCharHint: showCharHint === true,
+                    lockNavigation: lockNavigation === true, 
                     updated: new Date()
                 };
                 if (!this.isSupported || !this.db) {
@@ -1168,7 +1262,9 @@
         let currentSlotName = 'A';
         let currentTheme = 'blackboard';
         let currentShowCharHint = false;
+        let currentLockNavigation = false;
         
+        let audioEdits = {};
         let audioBlobs = {}; 
         let pageImages = {}; 
         
@@ -1289,10 +1385,12 @@
         }
 
         async function switchSlot(index) {
+            selectedStartPage = 0;
             currentSlotId = `slot_${index}`;
             const data = await StorageManager.loadSlot(currentSlotId);
             currentTheme = normalizeStageTheme(data?.theme);
             currentShowCharHint = data?.showCharHint === true;
+            currentLockNavigation = data?.lockNavigation === true;
             applyStageTheme();
             renderThemeChoices();
             const textEl = document.getElementById('config-text');
@@ -1301,6 +1399,7 @@
             const recArea = document.getElementById('recording-area');
 
             audioBlobs = {};
+            audioEdits = {};
             audioBuffers = {}; 
             pageImages = {}; 
 
@@ -1312,6 +1411,7 @@
             if (data) {
                 if (textEl) textEl.value = data.text || "";
                 audioBlobs = data.audio || {};
+                audioEdits = data.audioEdits || {};
                 
                 let loadedImages = data.images || {};
                 let tempParsed = parseConfig(data.text || "");
@@ -1357,7 +1457,7 @@
             btn.innerHTML = '保存中...';
 
             try {
-                const success = await StorageManager.saveSlot(currentSlotId, newName, textEl ? textEl.value : '', audioBlobs, pageImages, currentTheme, currentShowCharHint);
+                const success = await StorageManager.saveSlot(currentSlotId, newName, textEl ? textEl.value : '', audioBlobs, pageImages, currentTheme, currentShowCharHint, currentLockNavigation, audioEdits);
                 if (success) {
                     showStatus('保存しました！');
                     currentSlotName = newName;
@@ -1403,12 +1503,17 @@
                 name: currentSlotName,
                 text: textEl ? textEl.value : '',
                 audio: {},
+                audioEdits: {},
                 images: pageImages,
                 theme: currentTheme,
-                showCharHint: currentShowCharHint
+                showCharHint: currentShowCharHint,
+                lockNavigation: currentLockNavigation
             };
             for(const [key, blob] of Object.entries(audioBlobs)) {
                 exportData.audio[key] = await blobToBase64(blob);
+            }
+            for(const [key, edit] of Object.entries(audioEdits)) {
+                if(audioBlobs[key] && edit.sourceBlob) exportData.audioEdits[key] = {...edit, sourceBlob:await blobToBase64(edit.sourceBlob)};
             }
             const jsonStr = JSON.stringify(exportData);
             const blob = new Blob([jsonStr], {type: "application/json"});
@@ -1438,6 +1543,7 @@
                     const data = JSON.parse(e.target.result);
                     currentTheme = normalizeStageTheme(data.theme);
                     currentShowCharHint = data.showCharHint === true;
+                    currentLockNavigation = data.lockNavigation === true;
                     applyStageTheme();
                     renderThemeChoices();
                     const textVal = data.text || "";
@@ -1449,6 +1555,7 @@
                         if (nameEl) nameEl.textContent = data.name;
                     }
                     audioBlobs = {};
+            audioEdits = {};
                     audioBuffers = {}; 
                     if(data.audio) {
                         for(const [key, base64] of Object.entries(data.audio)) {
@@ -1456,6 +1563,9 @@
                         }
                     }
                     
+                    for(const [key, edit] of Object.entries(data.audioEdits || {})) {
+                        if(audioBlobs[key] && typeof edit?.sourceBlob === 'string') audioEdits[key] = {...edit, sourceBlob:await base64ToBlob(edit.sourceBlob)};
+                    }
                     let loadedImages = data.images || {};
                     pageImages = {};
                     let tempParsed = parseConfig(textVal);
@@ -1470,7 +1580,7 @@
                         }
                     });
                     
-                    await StorageManager.saveSlot(currentSlotId, currentSlotName, textVal, audioBlobs, pageImages, currentTheme, currentShowCharHint);
+                    await StorageManager.saveSlot(currentSlotId, currentSlotName, textVal, audioBlobs, pageImages, currentTheme, currentShowCharHint, currentLockNavigation, audioEdits);
                     
                     preloadAllAudios(); 
                     
@@ -1834,7 +1944,7 @@
                     <span class="rec-status">未録音</span>
                 </div>
                 <div class="rec-controls">
-                    <button class="btn-common btn-rec"><span class="record-dot" aria-hidden="true"></span>録音</button>
+                    <button class="btn-common btn-rec"><span class="record-dot" aria-hidden="true"></span>録音・編集</button>
                     <button class="btn-common btn-play" disabled>▶ 再生</button>
                     <button class="btn-common btn-file-load">
                         ↥ 読込
@@ -1900,6 +2010,7 @@
 
                     try {
                         const result = await extractAudioFromVideo(file);
+                        delete audioEdits[char];
                         audioBlobs[char] = result.blob;
                         if (result.buffer) {
                             audioBuffers[char] = result.buffer;
@@ -1933,6 +2044,7 @@
                         const trimmedBuffer = isMusic ? buffer : AudioUtils.trimSilence(buffer, audioCtx);
                         const newBlob = AudioUtils.bufferToWave(trimmedBuffer);
                         
+                        delete audioEdits[char];
                         audioBlobs[char] = newBlob;
                         audioBuffers[char] = trimmedBuffer;
                         
@@ -1952,10 +2064,11 @@
                 const doDelete = await showModal({ message: `${char} の録音を消しますか？`, type: 'confirm' });
                 if (doDelete) {
                     if (activeSources[char]) {
-                        try { activeSources[char].stop(); } catch(e) {}
+                        try { activeSources[char].mcCancelled = true; activeSources[char].stop(); } catch(e) {}
                         activeSources[char] = null;
                     }
                     delete audioBlobs[char];
+                    delete audioEdits[char];
                     delete audioBuffers[char];
                     forceUpdateRowStatus(div, char);
                     showStatus('削除しました');
@@ -1965,92 +2078,13 @@
         }
 
         async function toggleRecording(char, btn, rowDiv) {
-            if (recordingBusy) return;
-            if (mediaRecorder?.state === 'recording' && recordingChar !== char) {
-                showStatus('録音中の文字を停止してから、次の文字を録音してください。');
-                return;
-            }
-            if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-                await showModal({ message: "録音機能が使えません。", type: "alert" });
-                return;
-            }
-
-            let mimeType = 'audio/webm';
-            if (!MediaRecorder.isTypeSupported(mimeType)) {
-                if (MediaRecorder.isTypeSupported('audio/mp4')) mimeType = 'audio/mp4';
-                else mimeType = '';
-            }
-
-            if (mediaRecorder && mediaRecorder.state === 'recording') {
-                recordingBusy = true;
-                mediaRecorder.stop();
-                btn.innerHTML = '<span class="record-dot" aria-hidden="true"></span>録音';
-                btn.classList.remove('recording');
-                showStatus('処理中...');
-            } else {
-                stopAllAudio(); 
-                try {
-                    recordingBusy = true;
-                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    recordingChar = char;
-                    const options = mimeType ? { mimeType } : undefined;
-                    try { mediaRecorder = new MediaRecorder(stream, options); }
-                    catch(e) { mediaRecorder = new MediaRecorder(stream); }
-                    
-                    audioChunks = [];
-                    mediaRecorder.ondataavailable = (e) => audioChunks.push(e.data);
-                    mediaRecorder.onstop = async () => {
-                        const finalMime = mediaRecorder.mimeType || mimeType || 'audio/webm';
-                        const rawBlob = new Blob(audioChunks, { type: finalMime });
-                        
-                        try {
-                            initAudioContext();
-                            if (audioCtx.state === 'suspended') audioCtx.resume();
-
-                            const buffer = await AudioUtils.blobToBuffer(rawBlob, audioCtx);
-                            const isMusic = char.includes('♪');
-                            const trimmedBuffer = isMusic ? buffer : AudioUtils.trimSilence(buffer, audioCtx);
-                            const finalBlob = AudioUtils.bufferToWave(trimmedBuffer);
-
-                            audioBlobs[char] = finalBlob;
-                            audioBuffers[char] = trimmedBuffer;
-                            
-                            forceUpdateRowStatus(rowDiv, char);
-                            if (isMusic) {
-                                showStatus(`${char} を録音しました（無音カットなし）`);
-                            } else {
-                                showStatus(`${char} を録音し、無音をカットしました`);
-                            }
-                        } catch(err) {
-                            console.error(err);
-                            audioBlobs[char] = rawBlob;
-                            await prepareAudioBuffer(char, rawBlob); 
-                            forceUpdateRowStatus(rowDiv, char);
-                            showStatus(`${char} を録音しました`);
-                        }
-                        stream.getTracks().forEach(track => track.stop());
-                        recordingBusy = false;
-                        recordingChar = null;
-                        setRecordingLock(false);
-                    };
-                    mediaRecorder.start();
-                    recordingBusy = false;
-                    setRecordingLock(true, btn);
-                    btn.innerHTML = '■ 停止';
-                    btn.classList.add('recording');
-                } catch (err) {
-                    recordingBusy = false;
-                    recordingChar = null;
-                    setRecordingLock(false);
-                    await showModal({ message: 'マイクエラー: ' + err.message, type: "alert" });
-                }
-            }
+            return RecordingEditor.open(char, btn, rowDiv);
         }
 
         function stopAllAudio() {
             Object.keys(activeSources).forEach(char => {
                 if (activeSources[char]) {
-                    try { activeSources[char].stop(); } catch(e){}
+                    try { activeSources[char].mcCancelled = true; activeSources[char].stop(); } catch(e){}
                     activeSources[char] = null;
                 }
             });
@@ -2085,7 +2119,7 @@
             if (!buffer) return;
 
             if (activeSources[char]) {
-                try { activeSources[char].stop(); } catch(e) {}
+                try { activeSources[char].mcCancelled = true; activeSources[char].stop(); } catch(e) {}
                 activeSources[char] = null;
                 if (playBtn) {
                     playBtn.innerHTML = '▶ 再生';
@@ -2124,22 +2158,35 @@
             if (!buffer) return;
 
             if (isMusic && btnElement) {
-                if (activeSources[char]) {
-                    try { activeSources[char].stop(); } catch(e) {}
-                    activeSources[char] = null;
-                    btnElement.classList.remove('playing');
+                btnElement.dataset.musicFinished = 'false';
+                const existing = activeSources[char];
+                if (existing) {
+                    existing.mcCancelled = true;
+                    try { existing.stop(); } catch(e) {}
+                    if (activeSources[char] === existing) activeSources[char] = null;
                 } else {
                     const source = audioCtx.createBufferSource();
                     source.buffer = buffer;
+                    source.mcButton = btnElement;
+                    source.mcCancelled = false;
                     source.connect(audioCtx.destination);
                     source.onended = () => {
-                        btnElement.classList.remove('playing');
-                        activeSources[char] = null;
+                        if (activeSources[char] === source) activeSources[char] = null;
+                        const board = document.getElementById('char-container');
+                        if (!board.contains(btnElement)) return;
+                        const screen = document.getElementById('app-screen');
+                        if (screen.classList.contains('session-finished') || getComputedStyle(screen).display === 'none') return;
+                        if (!source.mcCancelled) {
+                            btnElement.dataset.musicFinished = 'true';
+                            const index = Number(btnElement.dataset.validIndex);
+                            if (currentStepInPage === index) currentStepInPage++;
+                        }
+                        updateCharacterStates();
                     };
-                    source.start(0);
                     activeSources[char] = source;
-                    btnElement.classList.add('playing');
+                    source.start(0);
                 }
+                updateCharacterStates();
                 return;
             }
 
@@ -2171,16 +2218,19 @@
                 await showModal({ message: "文字が入力されていません", type: "alert" });
                 return;
             }
-            currentPage = 0;
+            currentPage = Math.min(pages.length - 1, Math.max(0, selectedStartPage));
             currentStepInPage = 0; 
             updateDisplay();
             document.getElementById('setup-screen').style.display = 'none';
             document.getElementById('app-screen').style.display = 'flex';
             document.getElementById('app-screen').scrollTop = 0;
             document.querySelector('#char-container .current')?.focus({ preventScroll: true });
+            queueCharacterLayout();
         }
 
         function goSetup() {
+            selectedStartPage = currentPage;
+            renderStartPageOptions();
             resetGearPresses();
             stopAllAudio();
             document.getElementById('app-screen').style.display = 'none';
@@ -2254,7 +2304,6 @@
                 }
             });
             const validCount = validButtonIndices.length;
-            document.getElementById('stage-guide').textContent = currentStepInPage >= validCount ? 'よめたね！ つぎへ すすもう' : 'ひかる もじを おしてね';
             document.getElementById('app-screen').classList.toggle('stage-complete', currentStepInPage >= validCount);
             document.getElementById('stage-fill').style.width = (validCount ? Math.min(currentStepInPage, validCount) / validCount * 100 : 100) + '%';
             document.getElementById('stage-progress').textContent = `${Math.min(currentStepInPage, validCount)} / ${validCount} もじ`;
@@ -2274,70 +2323,30 @@
                 container.classList.remove('with-image'); 
             }
 
-            const threshold = isImageVisible ? 24 : 32;
-
-            if (buttonTexts.length > threshold) {
-                container.classList.add('compact-mode');
-            } else {
-                container.classList.remove('compact-mode');
-            }
+            container.classList.remove('compact-mode');
 
             buttonTexts.forEach((btnText, index) => {
                 const btn = document.createElement('button');
+                btn.type = 'button';
                 btn.className = 'char-btn';
-                
-                if (btnText.length >= 3) {
-                    btn.classList.add('long-text');
-                } else if (btnText.length === 2) {
-                    btn.classList.add('small-text');
-                }
-                
+                if (btnText.length >= 3) btn.classList.add('long-text');
+                else if (btnText.length === 2) btn.classList.add('small-text');
                 if (btnText === ' ' || btnText === '　') {
                     btn.classList.add('empty');
+                    btn.disabled = true;
+                    btn.setAttribute('aria-hidden', 'true');
                 } else {
-                    btn.textContent = btnText;
-                    
-                    const validIndex = validButtonIndices.indexOf(index);
-                    const isMusic = btnText.includes('♪');
-                    const isPlaying = isMusic && activeSources[btnText];
-
-                    if (validIndex < currentStepInPage) {
-                        if (isMusic) {
-                            btn.style.opacity = "1";
-                            btn.style.cursor = "pointer";
-                            
-                            if (isPlaying) {
-                                btn.classList.add('playing');
-                                const stopAction = (e) => {
-                                    e.preventDefault();
-                                    handlePress(btn, btnText, true, false); 
-                                };
-                                btn.addEventListener('click', stopAction);
-                            } else {
-                                const replayAction = (e) => {
-                                    e.preventDefault();
-                                    handlePress(btn, btnText, true, false);
-                                };
-                                btn.addEventListener('click', replayAction);
-                            }
-                        } else {
-                            btn.classList.add('done');
-                            btn.disabled = true;
-                        }
-                    } else if (validIndex === currentStepInPage) {
-                        btn.classList.add('current');
-                        const playAction = (e) => {
-                            e.preventDefault(); 
-                            handlePress(btn, btnText, true, true);
-                        };
-                        btn.addEventListener('click', playAction);
-                        btn.setAttribute('aria-label', `${btnText} を読む`);
-                        btn.setAttribute('aria-current', 'step');
-                    } else {
-                        btn.style.opacity = "0.5";
-                        btn.style.cursor = "default";
-                        btn.disabled = true;
-                    }
+                    btn.dataset.buttonText = btnText;
+                    btn.dataset.validIndex = String(validButtonIndices.indexOf(index));
+                    const label = document.createElement('span');
+                    label.className = 'char-label';
+                    label.textContent = btnText;
+                    btn.appendChild(label);
+                    btn.onclick = event => {
+                        event.preventDefault();
+                        if (btn.disabled) return;
+                        handlePress(btn, btnText, true, btn.classList.contains('current'));
+                    };
                 }
                 container.appendChild(btn);
             });
@@ -2356,39 +2365,35 @@
             if (prevBtn) {
                 prevBtn.style.visibility = (currentPage === 0) ? 'hidden' : 'visible';
             }
+            const blocked = currentLockNavigation && currentStepInPage < validCount;
+            if (nextBtn) nextBtn.disabled = blocked;
+            if (prevBtn) prevBtn.disabled = blocked;
+            beginCharacterLayout();
+            updateCharacterStates();
+            queueCharacterLayout();
         }
 
         function handlePress(btnElement, text, isValid, isCurrentStep) {
-            if (!isValid || (isCurrentStep && btnElement.dataset.processed)) return;
-
-            if (text.includes('♪')) {
-                if (isCurrentStep && !btnElement.dataset.processed) {
-                     btnElement.dataset.processed = "true";
-                     const pressedPage = currentPage;
-                    setTimeout(() => { 
-                        if (document.getElementById('app-screen').classList.contains('session-finished') || currentPage !== pressedPage) return;
-                        currentStepInPage++;
-                        updateDisplay();
-                    }, 200);
-                }
-                if (!isCurrentStep) {
-                     setTimeout(() => { updateDisplay(); }, 100);
-                }
-            } else {
-                if (isCurrentStep && !btnElement.dataset.processed) {
-                    btnElement.dataset.processed = "true";
-                    const pressedPage = currentPage;
-                    setTimeout(() => { 
-                        if (document.getElementById('app-screen').classList.contains('session-finished') || currentPage !== pressedPage) return;
-                        currentStepInPage++;
-                        updateDisplay();
-                    }, 500);
-                }
+            if (!isValid || btnElement.disabled) return;
+            const isMusic = text.includes('♪');
+            const index = Number(btnElement.dataset.validIndex);
+            const shouldAdvance = isCurrentStep && index === currentStepInPage;
+            if (!isMusic && btnElement.dataset.advancePending === 'true') return;
+            if (shouldAdvance && btnElement.dataset.advancePending !== 'true') {
+                btnElement.dataset.advancePending = 'true';
+                const pressedPage = currentPage;
+                setTimeout(() => {
+                    const screen = document.getElementById('app-screen');
+                    if (!document.getElementById('char-container').contains(btnElement) || currentPage !== pressedPage || currentStepInPage !== index || screen.classList.contains('session-finished') || getComputedStyle(screen).display === 'none') return;
+                    currentStepInPage++;
+                    updateCharacterStates();
+                }, isMusic ? 200 : 500);
             }
             playAudio(text, btnElement);
         }
 
         function nextPage() {
+            if (!canNavigateStagePage()) return;
             stopAllAudio();
             if (currentPage < pages.length - 1) { 
                 currentPage++; 
@@ -2400,6 +2405,7 @@
         }
 
         function prevPage() {
+            if (!canNavigateStagePage()) return;
             stopAllAudio();
             if (currentPage > 0) { 
                 currentPage--; 
@@ -2450,6 +2456,7 @@
             empty.textContent = !rows.length ? '台本を書くと、ここに文字のカードが並びます。' : missing && ready === rows.length ? 'すべての文字に音声が入りました。準備完了です！' : '一致する文字がありません。検索条件を変えてみてください。';
         }
         function refreshPagePreview() {
+            renderStartPageOptions();
             const parsed = parseConfig(document.getElementById('config-text').value);
             document.getElementById('page-count').textContent = parsed.length + 'ページ';
             const container = document.getElementById('page-preview');
@@ -2485,6 +2492,7 @@
         function renderThemeChoices() {
             const container = document.getElementById('theme-choices');
             document.getElementById('show-char-hint').checked = currentShowCharHint;
+            document.getElementById('lock-page-navigation').checked = currentLockNavigation;
             if (!container) return;
             container.replaceChildren();
             for (const theme of STAGE_THEMES) {
@@ -2509,7 +2517,7 @@
             document.getElementById('current-theme-name').textContent = STAGE_THEMES.find(theme => theme.id === currentTheme).name;
         }
 
-        const SESSION_CONTENT_IDS = ['header-area', 'image-area', 'stage-guide', 'char-container', 'stage-progress-wrap', 'footer-nav'];
+        const SESSION_CONTENT_IDS = ['header-area', 'image-area', 'char-container', 'stage-progress-wrap', 'footer-nav'];
         function resetCompletionScreen() {
             document.getElementById('app-screen').classList.remove('session-finished');
             document.getElementById('completion-screen').hidden = true;
@@ -2528,6 +2536,587 @@
             currentShowCharHint = enabled === true;
             applyStageTheme();
         }
+
+        let characterLayoutFrame = 0;
+        let characterLayoutGeneration = 0;
+        let fittedCharacterLayoutKey = null;
+        function beginCharacterLayout() {
+            characterLayoutGeneration++;
+            fittedCharacterLayoutKey = null;
+            const board = document.getElementById('char-container');
+            board.dataset.layoutReady = 'false';
+            board.scrollTop = 0;
+        }
+        function queueCharacterLayout() {
+            if (characterLayoutFrame) return;
+            characterLayoutFrame = requestAnimationFrame(() => {
+                characterLayoutFrame = 0;
+                fitCharacterLayout();
+            });
+        }
+        function fitCharacterLayout() {
+            const board = document.getElementById('char-container');
+            const screen = document.getElementById('app-screen');
+            if (!board || !board.clientHeight || screen.classList.contains('session-finished') || getComputedStyle(screen).display === 'none') return;
+            const image = document.getElementById('page-image');
+            if (getComputedStyle(document.getElementById('image-area')).display !== 'none' && !image.complete) return;
+            const key = [characterLayoutGeneration, board.clientWidth, board.clientHeight, screen.dataset.charHint].join(':');
+            if (fittedCharacterLayoutKey === key) return;
+            const buttons = [...board.querySelectorAll('.char-btn:not(.empty)')];
+            if (!buttons.length) { board.dataset.layoutReady = 'true'; return; }
+            const preferred = window.innerWidth <= 700 ? 86 : 112;
+            const minimum = window.innerWidth <= 700 ? 56 : 64;
+            board.classList.remove('layout-scroll');
+            board.scrollTop = 0;
+            function applySize(size) {
+                board.style.setProperty('--character-size', size + 'px');
+                board.style.setProperty('--character-height', size + 4 + 'px');
+                board.style.setProperty('--character-font', Math.round(size * .52) + 'px');
+                board.style.setProperty('--character-small-font', Math.round(size * .39) + 'px');
+                board.style.setProperty('--character-long-font', Math.max(18, Math.round(size * .30)) + 'px');
+                board.style.setProperty('--character-gap', Math.max(8, Math.round(size * .16)) + 'px');
+                board.style.setProperty('--character-radius', Math.max(12, Math.round(size * .20)) + 'px');
+            }
+            function fits() {
+                const bounds = board.getBoundingClientRect();
+                return board.scrollHeight <= board.clientHeight + 1 && buttons.every(button => {
+                    const rect = button.getBoundingClientRect();
+                    return rect.top >= bounds.top + 8 && rect.bottom <= bounds.bottom - 9 && rect.left >= bounds.left + 6 && rect.right <= bounds.right - 6 && (() => { const label = button.querySelector('.char-label'); return !label || label.scrollWidth <= label.clientWidth + 1; })();
+                });
+            }
+            applySize(preferred);
+            if (!fits()) {
+                applySize(minimum);
+                if (fits()) {
+                    let low = minimum, high = preferred;
+                    while (low < high) {
+                        const candidate = Math.ceil((low + high) / 2);
+                        applySize(candidate);
+                        if (fits()) low = candidate;
+                        else high = candidate - 1;
+                    }
+                    applySize(low);
+                } else {
+                    // Long scripts keep readable touch targets and scroll only inside the board.
+                    board.classList.add('layout-scroll');
+                }
+            }
+            fittedCharacterLayoutKey = key;
+            board.dataset.layoutReady = 'true';
+            keepCurrentCharacterVisible();
+        }
+        if (typeof ResizeObserver !== 'undefined') {
+            const characterLayoutObserver = new ResizeObserver(queueCharacterLayout);
+            characterLayoutObserver.observe(document.getElementById('char-container'));
+        }
+        document.getElementById('page-image').addEventListener('load', queueCharacterLayout);
+        document.getElementById('page-image').addEventListener('error', queueCharacterLayout);
+        window.addEventListener('resize', queueCharacterLayout);
+        window.addEventListener('orientationchange', queueCharacterLayout);
+        window.visualViewport?.addEventListener('resize', queueCharacterLayout);
+        document.fonts?.ready.then(queueCharacterLayout);
+        function setNavigationLock(enabled) {
+            currentLockNavigation = enabled === true;
+        }
+        function canNavigateStagePage() {
+            return !currentLockNavigation || isStagePageComplete();
+        }
+
+        function updateCharacterStates() {
+            const board = document.getElementById('char-container');
+            const buttons = [...board.querySelectorAll('.char-btn:not(.empty)')];
+            for (const button of buttons) {
+                const text = button.dataset.buttonText;
+                const index = Number(button.dataset.validIndex);
+                const isMusic = text.includes('♪');
+                const isDone = index < currentStepInPage;
+                const musicFinished = button.dataset.musicFinished === 'true';
+                const musicPlaying = isMusic && activeSources[text]?.mcButton === button;
+                const retryFinalMusic = isMusic && isDone && index === buttons.length - 1 && !musicFinished && !musicPlaying;
+                const isCurrent = index === currentStepInPage || retryFinalMusic;
+                button.classList.toggle('current', isCurrent);
+                button.classList.toggle('done', isMusic ? musicFinished : isDone);
+                button.classList.toggle('playing', musicPlaying);
+                button.disabled = index > currentStepInPage || (isDone && !isMusic);
+                button.setAttribute('aria-label', isCurrent ? `${text} を読む` : text);
+                if (isCurrent) button.setAttribute('aria-current', 'step');
+                else button.removeAttribute('aria-current');
+            }
+            const count = buttons.length;
+            const complete = isStagePageComplete();
+            document.getElementById('app-screen').classList.toggle('stage-complete', complete);
+            document.getElementById('stage-fill').style.width = (count ? Math.min(currentStepInPage, count) / count * 100 : 100) + '%';
+            document.getElementById('stage-progress').textContent = `${Math.min(currentStepInPage, count)} / ${count} もじ`;
+            const blocked = currentLockNavigation && !complete;
+            document.getElementById('btn-next').disabled = blocked;
+            document.getElementById('btn-prev').disabled = blocked;
+            keepCurrentCharacterVisible();
+        }
+        function keepCurrentCharacterVisible() {
+            const board = document.getElementById('char-container');
+            const current = board.querySelector('.current');
+            if (!board.classList.contains('layout-scroll') || !current) return;
+            const top = current.offsetTop - 32;
+            const bottom = current.offsetTop + current.offsetHeight + 15;
+            if (top < board.scrollTop) board.scrollTop = Math.max(0, top);
+            else if (bottom > board.scrollTop + board.clientHeight) board.scrollTop = bottom - board.clientHeight;
+        }
+
+        function isStagePageComplete() {
+            const buttons = [...document.querySelectorAll('#char-container .char-btn:not(.empty)')];
+            if (currentStepInPage < buttons.length) return false;
+            const last = buttons[buttons.length - 1];
+            return !last || !last.dataset.buttonText.includes('♪') || last.dataset.musicFinished === 'true';
+        }
+        let selectedStartPage = 0;
+        function renderStartPageOptions() {
+            const select = document.getElementById('start-page-select');
+            if (!select) return;
+            const list = parseConfig(document.getElementById('config-text').value);
+            selectedStartPage = Math.min(Math.max(0, selectedStartPage), Math.max(0, list.length - 1));
+            select.replaceChildren();
+            list.forEach((page, index) => {
+                const option = document.createElement('option');
+                option.value = String(index);
+                option.textContent = `${index + 1}：${page.title}`;
+                option.selected = index === selectedStartPage;
+                select.appendChild(option);
+            });
+            if (!list.length) {
+                const option = document.createElement('option');
+                option.value = '0'; option.textContent = '台本を入力してください';
+                select.appendChild(option);
+            }
+            select.disabled = list.length === 0;
+        }
+        function setStartPage(value) {
+            selectedStartPage = Math.max(0, Number.parseInt(value, 10) || 0);
+        }
+
+const PCM_WORKLET_SOURCE = "class MCPcmCapture extends AudioWorkletProcessor {\n    constructor() {\n        super();this.closed=false;this.active=false;this.take=0;this.pending=new Float32Array(4096);this.used=0;\n        this.port.onmessage=event=>{const message=event.data;\n            if(message.type==='start'){this.take=message.take;this.used=0;this.active=true;}\n            else if(message.type==='stop'&&message.take===this.take){this.active=false;this.flush();this.port.postMessage({type:'stopped',take:this.take});}\n            else if(message.type==='abort'){this.active=false;this.used=0;this.closed=true;}\n        };\n    }\n    flush(){if(!this.used)return;const data=this.pending.slice(0,this.used);this.port.postMessage({type:'chunk',take:this.take,data},[data.buffer]);this.used=0;}\n    process(inputs,outputs){if(this.closed)return false;for(const output of outputs)for(const channel of output)channel.fill(0);const input=inputs[0]?.[0];\n        if(this.active&&input){let offset=0;while(offset<input.length){const count=Math.min(input.length-offset,this.pending.length-this.used);this.pending.set(input.subarray(offset,offset+count),this.used);this.used+=count;offset+=count;if(this.used===this.pending.length)this.flush();}}\n        return true;\n    }\n}\nregisterProcessor('mc-pcm-capture',MCPcmCapture);\n";
+        const pcmModules = new WeakMap();
+        async function createPcmRecorder(context,input,onChunk,onStop,onError) {
+            let node,kind='worklet',take=0,state='inactive',closed=false;
+            const silent=context.createGain();silent.gain.value=0;silent.connect(context.destination);
+            const api={
+                get state(){return state;},kind,
+                start(id){if(closed)throw new Error('録音入力が閉じています。');take=id;state='recording';if(kind==='worklet')node.port.postMessage({type:'start',take});},
+                stop(){if(state!=='recording')return;state='processing';if(kind==='worklet')node.port.postMessage({type:'stop',take});else{state='inactive';onStop(take);}},
+                dispose(){if(closed)return;closed=true;state='inactive';try{if(kind==='worklet'){node.port.postMessage({type:'abort'});node.port.onmessage=null;node.port.close();}else node.onaudioprocess=null;}catch(e){}try{input.disconnect(node);}catch(e){}try{node?.disconnect();}catch(e){}try{silent.disconnect();}catch(e){}}
+            };
+            try {
+                if(!context.audioWorklet||typeof AudioWorkletNode==='undefined')throw new Error('worklet unavailable');
+                if(!pcmModules.has(context)){
+                    const url=URL.createObjectURL(new Blob([PCM_WORKLET_SOURCE],{type:'application/javascript'}));
+                    const promise=context.audioWorklet.addModule(url).finally(()=>URL.revokeObjectURL(url));pcmModules.set(context,promise);
+                }
+                await pcmModules.get(context);
+                node=new AudioWorkletNode(context,'mc-pcm-capture',{numberOfInputs:1,numberOfOutputs:1,outputChannelCount:[1],channelCount:1,channelCountMode:'explicit'});
+                node.port.onmessage=event=>{if(closed)return;const message=event.data;if(message.take!==take)return;if(message.type==='chunk')onChunk(message.data,take);else if(message.type==='stopped'){state='inactive';onStop(take);}};
+                node.onprocessorerror=()=>{if(!closed){state='inactive';onError(new Error('録音処理が中断されました。'));}};
+            } catch(error) {
+                kind='script';api.kind=kind;
+                if(!context.createScriptProcessor){silent.disconnect();throw new Error('この環境ではPCM録音を使用できません。');}
+                try{node=context.createScriptProcessor(4096,1,1);}catch(error){silent.disconnect();throw error;}
+                node.onaudioprocess=event=>{event.outputBuffer.getChannelData(0).fill(0);if(!closed&&state==='recording')onChunk(event.inputBuffer.getChannelData(0).slice(),take);};
+            }
+            try{input.connect(node);node.connect(silent);}catch(error){api.dispose();throw error;}return api;
+        }
+
+        const RecordingAudio = {
+            bounds(buffer, startSeconds, endSeconds) {
+                const length = buffer.length;
+                const start = Math.max(0, Math.min(length - 1, Math.round(startSeconds * buffer.sampleRate)));
+                const end = Math.max(start + 1, Math.min(length, Math.round(endSeconds * buffer.sampleRate)));
+                return {start, end};
+            },
+            crop(buffer, start, end, context) {
+                start = Math.max(0, Math.min(buffer.length - 1, Math.round(start)));
+                end = Math.max(start + 1, Math.min(buffer.length, Math.round(end)));
+                const result = context.createBuffer(buffer.numberOfChannels, end - start, buffer.sampleRate);
+                for (let channel = 0; channel < buffer.numberOfChannels; channel++) result.copyToChannel(buffer.getChannelData(channel).subarray(start, end), channel);
+                return result;
+            },
+            db(value) { return 20*Math.log10(Math.max(1e-6,value)); },
+            rmsWindows(buffer) {
+                const size=Math.max(1,Math.round(buffer.sampleRate*.01)),channels=Array.from({length:buffer.numberOfChannels},(_,i)=>buffer.getChannelData(i)),levels=[];
+                for(let offset=0;offset<buffer.length;offset+=size){const end=Math.min(buffer.length,offset+size);let sum=0;for(const channel of channels)for(let i=offset;i<end;i++)sum+=channel[i]*channel[i];levels.push(Math.sqrt(sum/((end-offset)*channels.length)));}
+                return {size,levels};
+            },
+            estimateSilenceDb(buffer,roomDb=null) {
+                const {levels}=this.rmsWindows(buffer),sorted=[...levels].sort((a,b)=>a-b);
+                if(!sorted.length||sorted[sorted.length-1]<1e-6)return -60;
+                const floor=this.db(sorted[Math.floor((sorted.length-1)*.2)]),voice=this.db(sorted[Math.floor((sorted.length-1)*.95)]||sorted[sorted.length-1]);
+                const noise=Number.isFinite(roomDb)?Math.min(roomDb,floor):floor;
+                return Math.round(Math.max(-65,Math.min(-15,noise+10,voice-6)));
+            },
+            silenceBounds(buffer,thresholdDb=this.estimateSilenceDb(buffer)) {
+                const {size,levels}=this.rmsWindows(buffer),threshold=Math.pow(10,thresholdDb/20);
+                let first=-1,last=-1;
+                for(let i=0;i<levels.length-1;i++)if(levels[i]>=threshold&&levels[i+1]>=threshold){if(first<0)first=i;last=i+1;}
+                if(first<0)return null;
+                return {start:Math.max(0,first*size-Math.round(buffer.sampleRate*.08)),end:Math.min(buffer.length,(last+1)*size+Math.round(buffer.sampleRate*.12))};
+            },
+            selectionPeak(buffer,start,end,peaks) {
+                if(!peaks)return 0;let value=0;const count=peaks.low.length;
+                for(let bin=0;bin<count;bin++){const from=Math.floor(bin*buffer.length/count),to=Math.floor((bin+1)*buffer.length/count);if(to<=start||from>=end)continue;
+                    if(from>=start&&to<=end)value=Math.max(value,-peaks.low[bin],peaks.high[bin]);
+                    else for(let channel=0;channel<buffer.numberOfChannels;channel++){const data=buffer.getChannelData(channel);for(let i=Math.max(start,from);i<Math.min(end,to);i++)value=Math.max(value,Math.abs(data[i]));}}
+                return value;
+            },
+            volumePlan(peak,db) {
+                const requested=Math.pow(10,db/20),ceiling=Math.pow(10,-1/20),gain=Math.min(requested,peak>0?ceiling/peak:requested);
+                return {gain,limited:gain<requested-.000001,peak:peak*gain,db:20*Math.log10(Math.max(gain,1e-12))};
+            },
+            scale(buffer,gain,context) {
+                const result=context.createBuffer(buffer.numberOfChannels,buffer.length,buffer.sampleRate);
+                for(let channel=0;channel<buffer.numberOfChannels;channel++){const source=buffer.getChannelData(channel),output=result.getChannelData(channel);for(let i=0;i<buffer.length;i++)output[i]=source[i]*gain;}
+                return result;
+            },
+            peaks(buffer, bins = 2048) {
+                const count = Math.min(bins, buffer.length);
+                const low = new Float32Array(count), high = new Float32Array(count);
+                const channels = Array.from({length:buffer.numberOfChannels}, (_, index) => buffer.getChannelData(index));
+                let peak = 0;
+                for (let bin = 0; bin < count; bin++) {
+                    const start = Math.floor(bin * buffer.length / count), end = Math.floor((bin + 1) * buffer.length / count);
+                    let min = 0, max = 0;
+                    for (const channel of channels) for (let i = start; i < end; i++) {min = Math.min(min,channel[i]);max = Math.max(max,channel[i]);}
+                    low[bin] = min; high[bin] = max; peak = Math.max(peak,-min,max);
+                }
+                return {low,high,peak:Math.max(.02,peak)};
+            },
+            wav(buffer) {
+                const channels = buffer.numberOfChannels, bytes = buffer.length * channels * 2;
+                const data = new ArrayBuffer(44 + bytes), view = new DataView(data);
+                const word = (offset,text) => {for (let i=0;i<text.length;i++) view.setUint8(offset+i,text.charCodeAt(i));};
+                word(0,'RIFF');view.setUint32(4,36+bytes,true);word(8,'WAVE');word(12,'fmt ');view.setUint32(16,16,true);view.setUint16(20,1,true);view.setUint16(22,channels,true);view.setUint32(24,buffer.sampleRate,true);view.setUint32(28,buffer.sampleRate*channels*2,true);view.setUint16(32,channels*2,true);view.setUint16(34,16,true);word(36,'data');view.setUint32(40,bytes,true);
+                const samples=Array.from({length:channels},(_,channel)=>buffer.getChannelData(channel));
+                let offset=44;
+                for (let frame=0;frame<buffer.length;frame++) for (let channel=0;channel<channels;channel++) {const value=Math.max(-1,Math.min(1,samples[channel][frame]));view.setInt16(offset,Math.round(value*(value<0?32768:32767)),true);offset+=2;}
+                return new Blob([data],{type:'audio/wav'});
+            }
+        };
+
+        let lastRecordingInputGainDb = -6;
+        const recordingElement = id => document.getElementById('recording-' + id);
+        function setAudioSessionType(type) {try {if(navigator.audioSession)navigator.audioSession.type=type;}catch(e){}}
+        const RecordingEditor = {
+            session: null,
+            alive(session) { return this.session === session && !session.closed; },
+            async open(char, button, row) {
+                if (this.session || recordingBusy || isExtracting) return;
+                if (!audioBlobs[char] && !navigator.mediaDevices?.getUserMedia) {
+                    await showModal({message:'この環境ではマイク録音を使用できません。',type:'alert'}); return;
+                }
+                recordingBusy = true;
+                setRecordingLock(true);
+                stopAllAudio();
+                let stream;
+                try {
+                    initAudioContext();
+                    if (audioCtx.state === 'suspended') await audioCtx.resume();
+                    const existing=audioBlobs[char],edit=audioEdits[char];
+                    let existingBuffer;
+                    if(existing) {
+                        existingBuffer=edit?.sourceBlob?await AudioUtils.blobToBuffer(edit.sourceBlob,audioCtx):(audioBuffers[char]||await AudioUtils.blobToBuffer(existing,audioCtx));
+                        setAudioSessionType('playback');
+                    } else {
+                        setAudioSessionType('play-and-record');
+                        stream = await navigator.mediaDevices.getUserMedia({audio:{channelCount:{ideal:1},sampleRate:{ideal:48000},autoGainControl:false,echoCancellation:false,noiseSuppression:false}});
+                    }
+                    const session = {char,button,row,slotId:currentSlotId,stream,closed:false,phase:'idle',inputGainDb:lastRecordingInputGainDb,outputGainDb:0,silenceDb:-40,manualThreshold:false,roomNoiseDb:null,selectionPeak:0,rawClipUntil:0,inputClipUntil:0,buffer:null,peaks:null,start:0,end:0,count:3,take:0,raf:0,countTimer:0,preview:null,livePeaks:[],liveMax:.02};
+                    this.session = session;
+                    recordingChar = char;
+                    recordingElement('editor-char').textContent = char;
+                    recordingElement('editor-error').textContent = '';
+                    if(existingBuffer) {
+                        session.phase='editing';session.buffer=existingBuffer;session.sourceBlob=edit?.sourceBlob||existing;
+                        const finite=(v,f)=>Number.isFinite(v)?v:f;
+                        session.start=Math.max(0,Math.min(existingBuffer.length-1,Math.round(finite(edit?.startSeconds,0)*existingBuffer.sampleRate)));
+                        session.end=Math.max(session.start+1,Math.min(existingBuffer.length,Math.round(finite(edit?.endSeconds,existingBuffer.duration)*existingBuffer.sampleRate)));
+                        session.outputGainDb=Math.max(-24,Math.min(24,finite(edit?.outputGainDb,0)));
+                        session.inputGainDb=Math.max(-24,Math.min(12,finite(edit?.inputGainDb,lastRecordingInputGainDb)));
+                        session.silenceDb=Math.max(-70,Math.min(-15,finite(edit?.silenceDb,-40)));
+                        session.manualThreshold=edit?.manualThreshold===true;session.roomNoiseDb=edit?.roomNoiseDb??null;
+                        session.peaks=RecordingAudio.peaks(existingBuffer);this.updateSelectionPeak(session);
+                        recordingElement('quality').textContent='無圧縮WAV・'+(existingBuffer.sampleRate/1000).toFixed(1)+' kHz';
+                    } else await this.setupAnalyser(session);
+                    if(!this.alive(session))return;
+                    recordingElement('editor').showModal();
+                    this.render(session);this.scheduleDraw(session);
+                } catch (error) {
+                    if (this.session) this.close(false);
+                    else {
+                        stream?.getTracks().forEach(track => track.stop());
+                        setAudioSessionType('playback');
+                        recordingBusy = false; recordingChar = null; setRecordingLock(false);
+                    }
+                    await showModal({message:'マイクを使用できませんでした。\n' + error.message,type:'alert'});
+                }
+            },
+            async setupAnalyser(session) {
+                if(session.pcm)session.pcm.dispose();
+                for(const node of [session.input,session.rawAnalyser,session.inputGain,session.analyser]){try{node?.disconnect();}catch(e){}}
+                session.pcmFailed=false;
+                session.input=audioCtx.createMediaStreamSource(session.stream);
+                session.rawAnalyser=audioCtx.createAnalyser();session.rawAnalyser.fftSize=2048;
+                session.inputGain=audioCtx.createGain();session.inputGain.channelCount=1;session.inputGain.channelCountMode='explicit';session.inputGain.gain.value=Math.pow(10,session.inputGainDb/20);
+                session.analyser=audioCtx.createAnalyser();session.analyser.fftSize=2048;
+                session.input.connect(session.rawAnalyser);session.rawAnalyser.connect(session.inputGain);session.inputGain.connect(session.analyser);
+                session.pcmChunks=[];
+                const pcm=await createPcmRecorder(audioCtx,session.analyser,(data,take)=>{if(this.alive(session)&&session.take===take)session.pcmChunks.push(data);},take=>this.finishCapture(session,take),error=>{if(this.alive(session)){session.pcmFailed=true;session.phase='error';recordingElement('editor-error').textContent=error.message;this.render(session);}});
+                if(!this.alive(session)){pcm.dispose();return;}
+                session.pcm=pcm;
+                const settings=session.stream.getTracks()[0]?.getSettings?.()||{};
+                recordingElement('quality').textContent='無圧縮WAV・'+(audioCtx.sampleRate/1000).toFixed(1)+' kHz';
+                if(settings.autoGainControl===true)recordingElement('editor-error').textContent='端末側の自動音量補正は有効です。入力メーターを確認しながら調整してください。';
+            },
+            async countdown(session) {
+                if (!this.alive(session)||!['idle','error'].includes(session.phase)||session.calibration) return;
+                this.stopPreview(session);
+                if(audioCtx.state!=='running') {
+                    session.phase='preparing';this.render(session);
+                    try{await audioCtx.resume();if(!this.alive(session))return;session.phase='idle';}
+                    catch(error){if(this.alive(session)){session.phase='error';recordingElement('editor-error').textContent='入力を再開できません。キャンセルして開き直してください。 '+error.message;this.render(session);}return;}
+                }
+                session.take++; session.buffer = null; session.peaks = null; session.livePeaks = []; session.liveMax = .02;
+                session.phase = 'countdown'; session.count = 3;session.countdownNoise=[];session.rawClipped=false;session.inputClipped=false;session.outputGainDb=0;
+                recordingElement('editor-error').textContent = '';
+                const tick = () => {
+                    if (!this.alive(session)) return;
+                    this.render(session);
+                    if (session.count === 0) {this.capture(session);return;}
+                    session.countTimer = setTimeout(() => {session.count--;tick();},1000);
+                };
+                tick();
+            },
+            async retake() {
+                const session = this.session;
+                if (!session || !['editing','error'].includes(session.phase)) return;
+                this.stopPreview(session);
+                if (!session.stream?.getTracks().some(track => track.readyState === 'live')) {
+                    session.phase = 'processing'; this.render(session);
+                    try {
+                        setAudioSessionType('play-and-record');
+                        const stream = await navigator.mediaDevices.getUserMedia({audio:{channelCount:{ideal:1},sampleRate:{ideal:48000},autoGainControl:false,echoCancellation:false,noiseSuppression:false}});
+                        if (!this.alive(session)) {stream.getTracks().forEach(track=>track.stop());return;}
+                        session.stream?.getTracks().forEach(track=>track.stop()); session.stream=stream; await this.setupAnalyser(session);if(!this.alive(session))return;
+                    } catch(error) {if(this.alive(session)){this.releaseInput(session);session.phase=session.buffer?'editing':'error';recordingElement('editor-error').textContent=error.message;this.render(session);}return;}
+                }
+                if(session.pcmFailed){try{await this.setupAnalyser(session);if(!this.alive(session))return;}catch(error){session.phase='error';recordingElement('editor-error').textContent=error.message;this.render(session);return;}}
+                session.phase='idle';session.sourceBlob=null;session.buffer=null;session.peaks=null;session.outputGainDb=0;session.rawClipped=false;session.inputClipped=false;recordingElement('editor-error').textContent='';this.render(session);
+            },
+            capture(session) {
+                if(!this.alive(session))return;
+                try {
+                    if(session.countdownNoise.length&&!session.manualThreshold){const levels=[...session.countdownNoise].sort((a,b)=>a-b);session.roomNoiseDb=RecordingAudio.db(levels[Math.floor(levels.length*.5)]);}
+                    session.pcmChunks=[];session.pcm.start(session.take);session.startedAt=performance.now();session.lastLivePeak=0;session.phase='recording';this.render(session);
+                }catch(error){session.phase='error';recordingElement('editor-error').textContent=error.message;this.render(session);}
+            },
+            finishCapture(session,take) {
+                if(!this.alive(session)||session.take!==take)return;
+                try {
+                    const length=session.pcmChunks.reduce((sum,chunk)=>sum+chunk.length,0);if(!length)throw new Error('録音データが空でした。');
+                    const buffer=audioCtx.createBuffer(1,length,audioCtx.sampleRate),output=buffer.getChannelData(0);let offset=0;
+                    for(const chunk of session.pcmChunks){output.set(chunk,offset);offset+=chunk.length;}session.pcmChunks=[];
+                    session.buffer=buffer;session.peaks=RecordingAudio.peaks(buffer);session.start=0;session.end=length;session.outputGainDb=0;this.updateSelectionPeak(session);
+                    if(!session.manualThreshold)session.silenceDb=RecordingAudio.estimateSilenceDb(buffer,session.roomNoiseDb);
+                    session.phase='editing';this.releaseInput(session);this.render(session);
+                }catch(error){this.releaseInput(session);session.phase='error';recordingElement('editor-error').textContent=error.message;this.render(session);}
+            },
+            async stop() {
+                const session=this.session;if(!session||session.phase!=='recording')return;
+                session.phase='processing';this.render(session);
+                try{if(audioCtx.state!=='running'){await audioCtx.resume();if(!this.alive(session))return;}session.pcm.stop();}catch(error){session.phase='error';recordingElement('editor-error').textContent=error.message;this.render(session);}
+            },
+            volumePlan(session) { return RecordingAudio.volumePlan(session.selectionPeak||0,session.outputGainDb||0); },
+            updateSelectionPeak(session) {session.selectionPeak=RecordingAudio.selectionPeak(session.buffer,session.start,session.end,session.peaks);},
+            setInputGain(value) {
+                const session=this.session;if(!session||!Number.isFinite(value))return;
+                session.inputGainDb=Math.max(-24,Math.min(12,value));lastRecordingInputGainDb=session.inputGainDb;session.roomNoiseDb=null;
+                if(!session.inputGain){this.render(session);return;}
+                const gain=Math.pow(10,session.inputGainDb/20);if(session.inputGain.gain.setTargetAtTime)session.inputGain.gain.setTargetAtTime(gain,audioCtx.currentTime,.01);else session.inputGain.gain.value=gain;
+                this.render(session);
+            },
+            setOutputGain(value) {const session=this.session;if(!session||session.phase!=='editing'||!Number.isFinite(value))return;this.stopPreview(session);session.outputGainDb=Math.max(-24,Math.min(24,value));this.render(session);},
+            normalize() {
+                const session=this.session;if(!session||session.phase!=='editing')return;
+                if(session.selectionPeak<.000001){recordingElement('editor-status').textContent='選択範囲に音声がないため、音量は変更していません。';return;}
+                this.setOutputGain(20*Math.log10(Math.pow(10,-3/20)/session.selectionPeak));
+                recordingElement('editor-status').textContent=session.outputGainDb===24?'ノーマライズの増幅は最大＋24 dBです。試聴して確認してください。':'選択範囲のピークが−3 dBになるよう音量を調整しました。';
+            },
+            setSilenceLevel(value) {const session=this.session;if(!session||!Number.isFinite(value))return;session.silenceDb=Math.max(-70,Math.min(-15,value));session.manualThreshold=true;this.render(session);},
+            calibrateNoise() {
+                const session=this.session;if(!session||!['idle','editing'].includes(session.phase)||session.calibration)return;
+                this.stopPreview(session);session.calibration={until:performance.now()+1000,levels:[]};this.render(session);recordingElement('editor-status').textContent='声を出さずに、1秒ほどお待ちください。環境音を測定しています。';
+            },
+            updateMeters(session,now) {
+                if(!session.analyser||!session.rawAnalyser) {
+                    for(const name of ['raw','input']){recordingElement(name+'-fill').style.width='0%';recordingElement(name+'-peak').style.left='0%';recordingElement(name+'-db').textContent='停止中';recordingElement(name+'-meter').setAttribute('aria-valuenow','-60');}
+                    recordingElement('input-warning').textContent='';return {rms:0,peak:0};
+                }
+                const measure=analyser=>{const key=analyser===session.rawAnalyser?'rawMeterSamples':'inputMeterSamples';const data=session[key]||(session[key]=new Float32Array(analyser.fftSize));analyser.getFloatTimeDomainData(data);let sum=0,peak=0;for(const value of data){sum+=value*value;peak=Math.max(peak,Math.abs(value));}return {rms:Math.sqrt(sum/data.length),peak};};
+                const raw=measure(session.rawAnalyser),input=measure(session.analyser);
+                for(const[name,levels]of [['raw',raw],['input',input]]){
+                    const db=RecordingAudio.db(levels.rms),peakDb=RecordingAudio.db(levels.peak),percent=Math.max(0,Math.min(100,(db+60)/60*100));
+                    recordingElement(name+'-fill').style.width=percent+'%';recordingElement(name+'-fill').style.background=peakDb>=-1?'#c34536':peakDb>=-6?'#d29c27':'#39815e';
+                    recordingElement(name+'-peak').style.left=Math.max(0,Math.min(99,(peakDb+60)/60*100))+'%';recordingElement(name+'-db').textContent=db<=-100?'−∞ dBFS':db.toFixed(1)+' dBFS';recordingElement(name+'-meter').setAttribute('aria-valuenow',String(Math.max(-60,Math.min(0,db))));
+                }
+                if(raw.peak>=.995){session.rawClipUntil=now+2000;if(session.phase==='recording')session.rawClipped=true;}
+                if(input.peak>=.995){session.inputClipUntil=now+1500;if(session.phase==='recording')session.inputClipped=true;}
+                const warning=session.rawClipped||session.rawClipUntil>now?'マイク入力が上限に達しています。端末から少し離れて録音してください。':session.inputClipped||session.inputClipUntil>now?'録音レベルが高すぎます。入力ゲインを下げて再録音してください。':'';
+                recordingElement('input-warning').textContent=warning;
+                if(session.phase==='countdown'&&session.count>=2)session.countdownNoise.push(input.rms);
+                if(session.calibration){session.calibration.levels.push(input.rms);if(now>=session.calibration.until){const levels=session.calibration.levels.sort((a,b)=>a-b),value=levels[Math.floor(levels.length*.5)]||0;session.roomNoiseDb=RecordingAudio.db(value);session.silenceDb=Math.max(-65,Math.min(-15,Math.round(session.roomNoiseDb+10)));session.manualThreshold=false;session.calibration=null;this.render(session);recordingElement('editor-status').textContent='環境音を測定しました。無音の基準を '+session.silenceDb+' dBFS に設定しました。';}}
+                return input;
+            },
+            render(session) {
+                if(!this.alive(session))return;
+                const editing=session.phase==='editing'&&!!session.buffer;
+                const counting=session.phase==='countdown';
+                const messages={preparing:'入力を準備しています。',idle:'入力レベルとゲインを確認し、「録音」を押してください。',countdown:'3秒前からカウントダウンします。',recording:'録音中です。話し終わったら「録音停止」を押してください。',processing:'録音した音声を読み込んでいます。',editing:'範囲を選び、再生して確認してから「決定」を押してください。',error:'再録音するか、キャンセルしてください。'};
+                recordingElement('editor-status').textContent=messages[session.phase];
+                recordingElement('countdown').hidden=!counting;recordingElement('countdown').textContent=String(session.count);
+                recordingElement('start').disabled=session.phase!=='idle'||!!session.calibration;
+                recordingElement('stop').hidden=session.phase!=='recording';
+                for(const id of ['preview','auto-trim','reset-trim','confirm','trim-start','trim-end','output-gain','normalize','output-reset'])recordingElement(id).disabled=!editing;
+                recordingElement('silence-level').disabled=!['idle','editing'].includes(session.phase);
+                recordingElement('noise-calibrate').disabled=session.phase!=='idle'||!!session.calibration;
+                recordingElement('input-gain').disabled=session.phase==='editing';recordingElement('input-reset').disabled=session.phase==='editing';
+                recordingElement('input-gain').value=String(session.inputGainDb);recordingElement('input-gain-value').textContent=(session.inputGainDb>0?'+':'')+session.inputGainDb.toFixed(1)+' dB';
+                recordingElement('output-gain').value=String(session.outputGainDb);recordingElement('output-gain-value').textContent=(session.outputGainDb>0?'+':'')+session.outputGainDb.toFixed(1)+' dB';
+                recordingElement('silence-level').value=String(session.silenceDb);recordingElement('silence-value').textContent=session.silenceDb+' dBFS';
+                if(editing){const plan=this.volumePlan(session);recordingElement('output-info').textContent=plan.limited?'歪み防止のため '+plan.db.toFixed(1)+' dB に制限':'出力ピーク '+RecordingAudio.db(plan.peak).toFixed(1)+' dBFS';}else recordingElement('output-info').textContent='';
+                recordingElement('retake').disabled=!['editing','error'].includes(session.phase);
+                recordingElement('preview').textContent=session.preview?'■ 再生停止':'▶ 選択範囲を再生';
+                if(editing) {
+                    const rate=session.buffer.sampleRate,duration=session.buffer.length/rate;
+                    recordingElement('trim-start').max=String((session.buffer.length-1)/rate);recordingElement('trim-end').max=String(duration);
+                    if(session.typingEdge!=='start')recordingElement('trim-start').value=(session.start/rate).toFixed(3);
+                    if(session.typingEdge!=='end')recordingElement('trim-end').value=(session.end/rate).toFixed(3);
+                    recordingElement('selection-length').textContent='選択 '+((session.end-session.start)/rate).toFixed(3)+' 秒';
+                    recordingElement('editor-time').textContent=duration.toFixed(2)+' 秒';
+                } else {
+                    recordingElement('trim-start').value='';recordingElement('trim-end').value='';recordingElement('selection-length').textContent='';
+                    if(['idle','countdown'].includes(session.phase))recordingElement('editor-time').textContent='0.00 秒';
+                }
+                this.draw(session);
+            },
+            setSelection(edge, seconds) {
+                const session=this.session;
+                if(!session||session.phase!=='editing'||!Number.isFinite(seconds))return;
+                this.stopPreview(session);
+                const frame=Math.round(seconds*session.buffer.sampleRate);
+                if(edge==='start')session.start=Math.max(0,Math.min(session.end-1,frame));
+                else session.end=Math.min(session.buffer.length,Math.max(session.start+1,frame));
+                this.updateSelectionPeak(session);this.render(session);
+            },
+            autoTrim() {
+                const session=this.session;if(!session||session.phase!=='editing')return;
+                this.stopPreview(session);
+                const range=RecordingAudio.silenceBounds(session.buffer,session.silenceDb);
+                if(range){session.start=range.start;session.end=range.end;this.updateSelectionPeak(session);this.render(session);recordingElement('editor-status').textContent='前後の無音を除いた範囲を選択しました。再生して確認してください。';}
+                else {this.render(session);recordingElement('editor-status').textContent='音声を検出できなかったため、範囲は変更していません。';}
+            },
+            resetTrim() {const session=this.session;if(!session||session.phase!=='editing')return;this.stopPreview(session);session.start=0;session.end=session.buffer.length;this.updateSelectionPeak(session);this.render(session);},
+            async preview() {
+                const session=this.session;if(!session||session.phase!=='editing')return;
+                if(session.preview){this.stopPreview(session);this.render(session);return;}
+                try {
+                    if(audioCtx.state==='suspended')await audioCtx.resume();
+                    if(!this.alive(session))return;
+                    this.releaseInput(session);
+                    const source=audioCtx.createBufferSource();source.buffer=this.renderOutput(session);source.connect(audioCtx.destination);
+                    session.preview=source;session.previewAt=audioCtx.currentTime;
+                    source.onended=()=>{if(!this.alive(session)||session.preview!==source)return;session.preview=null;try{source.disconnect();session.previewGain?.disconnect();}catch(e){}this.render(session);};
+                    source.start(0);
+                    this.render(session);this.scheduleDraw(session);
+                } catch(error) {this.stopPreview(session);recordingElement('editor-error').textContent='再生できませんでした。 '+error.message;this.render(session);}
+            },
+            stopPreview(session) {const source=session.preview;session.preview=null;if(source){try{source.stop();source.disconnect();session.previewGain?.disconnect();}catch(e){}}},
+            renderOutput(session) {
+                return RecordingAudio.scale(RecordingAudio.crop(session.buffer,session.start,session.end,audioCtx),this.volumePlan(session).gain,audioCtx);
+            },
+            releaseInput(session) {
+                session.pcm?.dispose();session.pcm=null;
+                session.stream?.getTracks().forEach(track=>track.stop());
+                for(const name of ['input','rawAnalyser','inputGain','analyser']){try{session[name]?.disconnect();}catch(e){}session[name]=null;}
+                setAudioSessionType('playback');
+            },
+            close(accept) {
+                const session=this.session;if(!session||session.closed)return;
+                let buffer,blob,edit;
+                if(accept) {
+                    if(session.phase!=='editing'||!session.buffer)return;
+                    try {
+                        if(session.slotId!==currentSlotId)throw new Error('台本が変更されています。キャンセルしてください。');
+                        buffer=this.renderOutput(session);blob=RecordingAudio.wav(buffer);
+                        edit={sourceBlob:session.sourceBlob||RecordingAudio.wav(session.buffer),startSeconds:session.start/session.buffer.sampleRate,endSeconds:session.end/session.buffer.sampleRate,outputGainDb:session.outputGainDb,inputGainDb:session.inputGainDb,silenceDb:session.silenceDb,manualThreshold:session.manualThreshold,roomNoiseDb:session.roomNoiseDb};
+                    } catch(error) {recordingElement('editor-error').textContent=error.message;return;}
+                }
+                session.closed=true;clearTimeout(session.countTimer);cancelAnimationFrame(session.raf);this.stopPreview(session);
+                this.releaseInput(session);
+                if(accept){
+                    audioEdits[session.char]=edit;
+                    audioBlobs[session.char]=blob;audioBuffers[session.char]=buffer;
+                }
+                this.session=null;recordingBusy=false;recordingChar=null;
+                const dialog=recordingElement('editor');if(dialog.open)dialog.close();
+                setRecordingLock(false);
+                if(accept){forceUpdateRowStatus(session.row,session.char);showStatus(session.char+' の音声を決定しました');}
+                if(session.button.isConnected)session.button.focus({preventScroll:true});
+            },
+            scheduleDraw(session) {
+                if(!this.alive(session)||session.raf)return;
+                session.raf=requestAnimationFrame(()=>{session.raf=0;if(!this.alive(session))return;const now=performance.now();if(!session.lastPaint||now-session.lastPaint>=50){session.lastPaint=now;this.draw(session);}this.scheduleDraw(session);});
+            },
+            draw(session) {
+                if(!this.alive(session))return;
+                const levels=this.updateMeters(session,performance.now());
+                const canvas=recordingElement('wave'),rect=canvas.getBoundingClientRect();if(!rect.width||!rect.height)return;
+                const ratio=window.devicePixelRatio||1,w=rect.width,h=rect.height;
+                if(canvas.width!==Math.round(w*ratio)||canvas.height!==Math.round(h*ratio)){canvas.width=Math.round(w*ratio);canvas.height=Math.round(h*ratio);}
+                const ctx=canvas.getContext('2d');ctx.setTransform(ratio,0,0,ratio,0,0);ctx.clearRect(0,0,w,h);
+                const top=8,bottom=h-22,center=(top+bottom)/2,amplitude=(bottom-top)*.45;
+                ctx.fillStyle='#f8fbf6';ctx.fillRect(0,0,w,h);
+                if(session.phase==='editing'&&session.buffer){const left=session.start/session.buffer.length*w,right=session.end/session.buffer.length*w;ctx.fillStyle='#e2f1e6';ctx.fillRect(left,top,right-left,bottom-top);ctx.fillStyle='#e8eceaaa';ctx.fillRect(0,top,left,bottom-top);ctx.fillRect(right,top,w-right,bottom-top);}
+                ctx.strokeStyle='#bdccc2';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(0,center);ctx.lineTo(w,center);ctx.stroke();
+                if(session.phase==='recording') {
+                    const now=performance.now();
+                    if(now-session.lastLivePeak>=70){session.lastLivePeak=now;session.livePeaks.push(levels.peak);}
+                    ctx.strokeStyle='#b7473a';ctx.beginPath();
+                    for(let x=0;x<w;x++){const value=session.livePeaks[Math.min(session.livePeaks.length-1,Math.floor(x/w*session.livePeaks.length))]||0;const height=Math.min(1,value)*amplitude;ctx.moveTo(x,center-height);ctx.lineTo(x,center+height);}
+                    ctx.stroke();recordingElement('editor-time').textContent=((now-session.startedAt)/1000).toFixed(1)+' 秒';
+                } else if(session.peaks&&session.buffer) {
+                    const {low,high}=session.peaks,gain=this.volumePlan(session).gain;
+                    for(let x=0;x<w;x++){const bin=Math.min(low.length-1,Math.floor(x/w*low.length)),frame=x/w*session.buffer.length;ctx.strokeStyle=frame>=session.start&&frame<=session.end?'#216b56':'#adb8b0';ctx.beginPath();ctx.moveTo(x,center+Math.max(-1,low[bin]*gain)*amplitude);ctx.lineTo(x,center+Math.min(1,high[bin]*gain)*amplitude);ctx.stroke();}
+                    for(const frame of [session.start,session.end]){const x=Math.max(4,Math.min(w-4,frame/session.buffer.length*w));ctx.fillStyle='#216b56';ctx.fillRect(x-1,top,2,bottom-top);ctx.fillRect(x-4,top,8,18);}
+                    if(session.preview){const time=session.start/session.buffer.sampleRate+audioCtx.currentTime-session.previewAt,x=time/(session.buffer.length/session.buffer.sampleRate)*w;ctx.strokeStyle='#b7473a';ctx.lineWidth=2;ctx.beginPath();ctx.moveTo(x,top);ctx.lineTo(x,bottom);ctx.stroke();}
+                    ctx.font='10px sans-serif';ctx.fillStyle='#667a75';for(let i=0;i<=4;i++){ctx.textAlign=i===0?'left':i===4?'right':'center';ctx.fillText((session.buffer.duration*i/4).toFixed(2)+'s',w*i/4,h-5);}
+                }
+            }
+        };
+        function setupRecordingEditor() {
+            recordingElement('start').onclick=()=>{if(RecordingEditor.session)RecordingEditor.countdown(RecordingEditor.session);};
+            recordingElement('input-gain').oninput=event=>RecordingEditor.setInputGain(Number(event.target.value));recordingElement('input-reset').onclick=()=>RecordingEditor.setInputGain(0);
+            recordingElement('output-gain').oninput=event=>RecordingEditor.setOutputGain(Number(event.target.value));recordingElement('output-reset').onclick=()=>RecordingEditor.setOutputGain(0);recordingElement('normalize').onclick=()=>RecordingEditor.normalize();
+            recordingElement('silence-level').oninput=event=>RecordingEditor.setSilenceLevel(Number(event.target.value));recordingElement('noise-calibrate').onclick=()=>RecordingEditor.calibrateNoise();
+            recordingElement('stop').onclick=()=>RecordingEditor.stop();recordingElement('preview').onclick=()=>RecordingEditor.preview();recordingElement('auto-trim').onclick=()=>RecordingEditor.autoTrim();recordingElement('reset-trim').onclick=()=>RecordingEditor.resetTrim();recordingElement('retake').onclick=()=>RecordingEditor.retake();recordingElement('cancel').onclick=()=>RecordingEditor.close(false);recordingElement('confirm').onclick=()=>RecordingEditor.close(true);
+            for(const edge of ['start','end']) {
+                const input=recordingElement('trim-'+edge);
+                input.oninput=event=>{const session=RecordingEditor.session,value=Number.parseFloat(event.target.value);if(!session||!Number.isFinite(value))return;session.typingEdge=edge;try{RecordingEditor.setSelection(edge,value);}finally{session.typingEdge=null;}};
+                input.onchange=event=>{const value=Number.parseFloat(event.target.value);if(Number.isFinite(value))RecordingEditor.setSelection(edge,value);else if(RecordingEditor.session)RecordingEditor.render(RecordingEditor.session);};
+            }
+            const dialog=recordingElement('editor');dialog.addEventListener('cancel',event=>{event.preventDefault();RecordingEditor.close(false);});dialog.addEventListener('close',()=>{if(RecordingEditor.session)RecordingEditor.close(false);});
+            const canvas=recordingElement('wave');let dragging=null;
+            canvas.addEventListener('pointerdown',event=>{const s=RecordingEditor.session;if(!s||s.phase!=='editing')return;event.preventDefault();const r=canvas.getBoundingClientRect(),frame=(event.clientX-r.left)/r.width*s.buffer.length;dragging={pointer:event.pointerId,edge:Math.abs(frame-s.start)<Math.abs(frame-s.end)?'start':'end'};canvas.setPointerCapture(event.pointerId);RecordingEditor.setSelection(dragging.edge,frame/s.buffer.sampleRate);});
+            canvas.addEventListener('pointermove',event=>{const s=RecordingEditor.session;if(!s||!dragging||dragging.pointer!==event.pointerId)return;event.preventDefault();const r=canvas.getBoundingClientRect();RecordingEditor.setSelection(dragging.edge,(event.clientX-r.left)/r.width*s.buffer.duration);});
+            const release=()=>{dragging=null;};canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);canvas.addEventListener('lostpointercapture',release);
+            if(typeof ResizeObserver!=='undefined')new ResizeObserver(()=>{if(RecordingEditor.session)RecordingEditor.draw(RecordingEditor.session);}).observe(canvas);
+            window.addEventListener('pagehide',()=>RecordingEditor.close(false));
+        }
+        setupRecordingEditor();
 
     </script>
 </body>
