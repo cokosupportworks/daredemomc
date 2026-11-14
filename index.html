@@ -2,8 +2,8 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>だれでもMC v2.2.3</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>だれでもMC v3.0</title>
     
 
     <!-- アプリアイコンの設定 -->
@@ -11,7 +11,7 @@
     <link rel="icon" href="apple-touch-icon.png">
 
     <!-- iOSホーム画面でのアプリ名の指定 -->
-    <meta name="apple-mobile-web-app-title" content="だれでもMC">
+    <meta name="apple-mobile-web-app-title" content="だれでもMC v3.0">
     
     <style>
         /* 全体の設定 */
@@ -625,87 +625,183 @@
             background-color: #f44336; 
             color: white;
         }
-    </style>
+/* MC Studio — a quiet workspace, a confident stage. */
+:root{--ink:#243d3a;--muted:#667a75;--green:#216b56;--line:#dce5df;--paper:#fff;--mint:#eaf3ed;--coral:#bd493d}
+*{box-sizing:border-box}body{font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Noto Sans JP",Meiryo,sans-serif;color:var(--ink);background:#f4f6f1}button,input,textarea{font:inherit}button,label,input{touch-action:manipulation}button{transition:background .15s,box-shadow .15s,transform .15s}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,label:focus-within{outline:3px solid #368dcb;outline-offset:3px}button:disabled{cursor:not-allowed}button:hover:not(:disabled){filter:brightness(.97)}[hidden]{display:none!important}h1,h2,p{margin:0}#setup-screen{background:#f4f6f1;background-image:none}.setup-header{height:100px;padding:18px 36px;display:flex;align-items:center;justify-content:space-between;gap:20px;background:#fff;border-bottom:1px solid var(--line);box-shadow:none;backdrop-filter:none}.brand{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);font-size:25px;font-weight:800;letter-spacing:.02em}.brand-mc{color:var(--green);margin-left:3px}.brand small{display:block;font-size:10px;font-weight:500;letter-spacing:.07em;margin-top:5px;color:var(--muted)}.brand-mark{width:47px;height:51px;background:var(--green);color:#fff;border-radius:15px 15px 15px 5px;display:grid;place-items:center}.brand-mark svg{width:30px;height:30px}.slot-group{display:flex;align-items:center;gap:18px}.eyebrow{font-size:10px;letter-spacing:.13em;font-weight:700;color:var(--muted)}#slot-container{gap:6px}.slot-btn{height:40px;width:42px;border-radius:10px;border:1px solid var(--line);font-size:14px;color:#697771;background:#f8faf7;box-shadow:none}.slot-btn.has-data{border-color:#a9b9af;color:var(--ink)}.slot-btn.active{background:var(--green);border-color:var(--green);color:#fff;transform:none;box-shadow:0 3px 7px #216b561c}.help-button{border:1px solid var(--line);border-radius:24px;background:white;color:var(--ink);height:40px;padding:0 16px;font-size:13px;display:flex;align-items:center;gap:9px}.setup-content{padding:30px 36px 28px;min-height:0;scroll-behavior:auto}.workspace-heading{max-width:1440px;margin:0 auto 26px;display:flex;align-items:center;justify-content:space-between}.workspace-heading .eyebrow{color:var(--green);font-size:10px;letter-spacing:.19em}.workspace-heading h1{font-size:29px;letter-spacing:.03em;margin:6px 0 9px;font-weight:750}.workspace-heading p{font-size:12px;color:var(--muted);line-height:1.8}.preparation-tag{font-size:11px;background:#e5eee5;border:1px solid #d5e2d5;padding:9px 13px;border-radius:30px;color:var(--green);display:flex;align-items:center;gap:7px}.preparation-tag i{height:6px;width:6px;background:var(--green);border-radius:50%}.studio-layout{display:grid;grid-template-columns:310px minmax(0,1fr);gap:22px;max-width:1440px;margin:auto;align-items:start}.panel{background:#fff;border:1px solid var(--line);border-radius:18px;min-width:0;box-shadow:0 5px 20px #223d3003}.script-panel{padding:23px}.panel-heading{display:flex;align-items:center;gap:12px;margin-bottom:27px}.step-number{font-size:12px;font-weight:700;color:var(--green);background:var(--mint);border-radius:9px;width:34px;height:34px;display:grid;place-items:center}h2{font-size:16px;color:var(--ink);line-height:1.6}.panel-heading p{font-size:10px;color:var(--muted);margin-top:4px}.script-label{display:flex;align-items:center;justify-content:space-between;font-size:11px;margin-bottom:10px;font-weight:650}.script-label label span{margin-left:5px;background:var(--mint);padding:3px 7px;border-radius:5px;color:var(--green)}#page-count{font-size:10px;color:var(--muted);font-weight:500}textarea{border:1px solid #d5dfd7;background:#fbfcf9;border-radius:10px;box-shadow:none;min-height:190px;height:220px;padding:14px 12px;line-height:2.05;font-size:13px;color:var(--ink);resize:vertical}.field-hint{font-size:10px;line-height:1.9;color:var(--muted);margin:10px 0 24px}.script-preview{border-top:1px solid var(--line);padding-top:19px}.script-preview>.eyebrow{letter-spacing:.04em;font-size:10px;margin-bottom:9px}.preview-page{display:flex;align-items:center;gap:9px;font-size:11px;padding:11px 0;border-bottom:1px solid #eef1eb;line-height:1.6}.preview-page>span:first-child{font-size:10px;color:#8c9c94;font-variant-numeric:tabular-nums}.preview-page>span:nth-child(2){flex:1;overflow-wrap:anywhere}.preview-page small{font-size:9px;color:var(--muted);white-space:nowrap}.data-actions{display:flex;gap:8px;margin-top:21px}.btn-small-action{margin:0;background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:8px;font-size:11px;min-height:38px;display:grid;place-items:center;flex:1;padding:8px;cursor:pointer}.btn-import{position:relative}.backup-hint{font-size:9px;color:var(--muted);margin:9px 0 0;text-align:center}.assets-panel{overflow:hidden;min-height:550px}.asset-tabs{display:flex;border-bottom:1px solid var(--line);padding:0 24px;gap:26px;background:#fcfdfa}.asset-tabs button{height:64px;border:none;border-radius:0;background:none;font-size:13px;font-weight:650;color:var(--muted);position:relative;padding:0 4px;white-space:nowrap}.asset-tabs button[aria-selected=true]{color:var(--green)}.asset-tabs button[aria-selected=true]:after{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;border-radius:3px;background:var(--green)}.asset-tabs button>span{font-size:10px;margin-right:7px;opacity:.7}.asset-tabs b{font-size:10px;background:var(--mint);padding:3px 7px;border-radius:6px;margin-left:6px}#audio-panel,#images-panel{padding:24px}.audio-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:19px}.audio-heading h2{font-size:19px;font-weight:700;letter-spacing:.02em}.audio-heading p{font-size:10px;color:var(--muted);margin-top:7px;line-height:1.8}.audio-total{white-space:nowrap;min-width:68px;text-align:right}.audio-total strong{font-size:26px;font-weight:650;color:var(--green)}.audio-total>span{font-size:13px;color:#8b9a91;margin-left:5px}.audio-total small{display:block;font-size:9px;color:var(--muted);margin-top:1px}.progress-track{height:4px;background:#edf1eb;border-radius:4px;overflow:hidden;margin-bottom:22px}.progress-track>div{height:100%;background:var(--green);transition:width .3s}.audio-toolbar{display:flex;align-items:center;gap:14px;margin-bottom:17px}.search-field{display:flex;align-items:center;border:1px solid var(--line);border-radius:8px;padding:0 10px;height:39px;max-width:210px;min-width:80px;background:#fff}.search-field>span{font-size:26px;color:#74867d;line-height:1}.search-field input{border:0;outline:0;background:none;width:100%;min-width:0;font-size:12px;padding:8px}.missing-filter{font-size:11px;display:flex;align-items:center;gap:5px;white-space:nowrap;cursor:pointer}input[type=checkbox]{accent-color:var(--green);height:17px;width:17px}#visible-count{font-size:10px;color:var(--muted);margin-left:auto;white-space:nowrap}#recording-area{padding:0;margin:0;box-shadow:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:12px;background:transparent}.rec-item{border:1px solid var(--line);padding:13px;border-radius:12px;margin:0;box-shadow:none;gap:12px;background:#fff;min-width:0}.rec-item.has-audio{background:#f8fbf7;border-color:#c6dbcb}.rec-char{font-size:28px;font-weight:650;min-width:44px;height:43px;display:flex;align-items:center;justify-content:center;background:#f0f4ee;border-radius:8px;padding:0 8px;color:var(--ink);overflow-wrap:anywhere;max-width:100%;line-height:1.3}.rec-header{gap:8px;min-height:43px}.rec-status{font-size:9px;color:#7b877f;white-space:nowrap;display:flex;align-items:center;gap:5px}.rec-status:before{content:"";height:5px;width:5px;background:#bac5bc;border-radius:50%;flex-shrink:0}.has-audio .rec-status{color:var(--green)}.has-audio .rec-status:before{background:var(--green)}.rec-controls{gap:5px;display:grid;grid-template-columns:1fr 1fr 1fr 32px}.rec-controls .btn-common{height:38px;min-height:38px;border-radius:7px;padding:0 4px;font-size:10px;font-weight:600;gap:2px;white-space:nowrap;letter-spacing:-.03em}.rec-controls .btn-rec{background:#fcf0ec;color:#a43d30;border:1px solid #f2d5ce}.rec-controls .btn-rec.recording{background:#b23c35;color:white}.rec-controls .btn-play{background:#edf5ef!important;border:1px solid #d3e4d6;color:var(--green)}.rec-controls .btn-play:disabled{background:#f3f4f1!important;color:#727b72;border-color:#e3e7df}.rec-controls .btn-file-load{background:#f3f5f0;color:#4d6255;border:1px solid #e0e6db}.rec-controls .btn-delete{width:32px;background:white;color:#7b877e;border:1px solid #e6eae2;font-size:13px}.audio-note{font-size:10px;color:var(--muted);margin-top:20px;padding:14px 0 0;border-top:1px solid #edf0e9;line-height:1.7}.audio-note span{color:#bb9448;margin-right:5px}.empty-state{padding:45px 12px;text-align:center;color:var(--muted);font-size:13px;line-height:1.8}.action-area{padding:15px 36px calc(15px + env(safe-area-inset-bottom));background:#fff;gap:12px;box-shadow:0 -4px 20px #233e3004;border-top:1px solid var(--line);align-items:center}.footer-note{display:flex;align-items:center;gap:12px;margin-right:auto;font-size:12px}.footer-note small{display:block;color:var(--muted);font-size:10px;margin-top:4px}.footer-symbol{font-size:28px;color:#9bb093}.btn-save,.btn-start{flex:none;font-size:13px;border-radius:10px;min-height:48px;padding:12px 23px;box-shadow:none}.btn-save{background:#fff;border:1px solid #bfcfc3;color:var(--green)}.btn-start{background:var(--green);display:flex;align-items:center;gap:38px;border:1px solid var(--green)}.btn-start:active{transform:translateY(1px);box-shadow:none}.btn-start span{font-size:20px}.status-msg{position:fixed;left:50%;bottom:95px;transform:translateX(-50%);background:var(--ink);border-radius:10px;color:white;height:auto;max-width:90%;width:max-content;padding:12px 20px;font-size:12px;z-index:500;box-shadow:0 5px 20px #0002;pointer-events:none}.status-msg:empty{display:none}.mobile-nav{display:none}dialog{border:1px solid var(--line);border-radius:20px;max-width:480px;width:calc(100% - 36px);padding:32px;color:var(--ink);max-height:85dvh;overflow:auto;box-shadow:0 24px 100px #193d3329}dialog::backdrop{background:#203d3a70;backdrop-filter:blur(4px)}dialog h2{font-size:21px;margin:14px 0 24px}dialog p{font-size:12px;line-height:1.9;color:var(--muted)}dialog li{margin:0 0 18px;padding-left:5px}dialog li strong{font-size:14px}dialog ol{padding-left:20px}.dialog-close{float:right;background:#f1f5ee;border:0;border-radius:50%;height:36px;width:36px;font-size:25px;color:var(--ink)}.guide-tip{background:var(--mint);border-radius:10px;padding:15px;font-size:12px;line-height:1.9;margin-top:18px}.modal-content{border-radius:18px;padding:28px;color:var(--ink);line-height:1.8;box-shadow:0 20px 80px #0002}.modal-buttons .btn-common{min-height:44px;border-radius:9px}.modal-overlay{background:#203d3a70;backdrop-filter:blur(3px)}#image-settings-area{padding:0;box-shadow:none}.img-item{border:1px solid var(--line);box-shadow:none;border-radius:12px;padding:16px;margin-bottom:12px}.img-header{font-size:12px;gap:12px;line-height:1.8}.img-switch-label{background:var(--mint);border:0;color:var(--green);font-size:11px;white-space:nowrap;min-height:44px}.img-content input{font-size:12px;max-width:100%}
+/* A simple stage with a single unmistakable next action. */
+#app-screen{background:#edf3e9;background-image:radial-gradient(ellipse at 50% 20%,#fff9eb 0%,transparent 70%);box-shadow:none;padding:24px 32px calc(24px + env(safe-area-inset-bottom));color:var(--ink)}#header-area{min-height:62px;flex-direction:column;gap:8px;margin-bottom:16px}#agenda-title{background:white;border:1px solid #d5dfcd;border-radius:14px;padding:10px 24px;color:var(--ink);font-size:19px;box-shadow:0 3px 0 #dce5d7}#page-position{font-size:11px;letter-spacing:.2em;color:var(--muted)}.stage-guide{text-align:center;font-size:14px;letter-spacing:.1em;color:#52684d;margin:8px 0 12px}.stage-progress{text-align:center;font-size:11px;color:var(--muted);padding:12px}.secret-setting-btn{color:#58785a;font-size:26px;width:65px;height:65px;top:0;opacity:.45}.secret-setting-btn.left{left:0;clip-path:none}.secret-setting-btn.right{right:0;clip-path:none}#char-container{gap:17px;padding:16px;align-content:center}.char-btn{background:#fff;color:#506248;border:2px solid #c4d2bb;border-radius:20px;opacity:1;box-shadow:0 5px 0 #d0dac7;transition:background .2s,transform .2s;flex-shrink:0}.char-btn.current{background:#fff9d8;color:#243e26;border:4px solid #2f7349;box-shadow:0 6px 0 #a7bd8d,0 0 0 5px #d8e7ba;animation:none;transform:translateY(-2px)}.char-btn.current:active{background:#f8e99a;transform:translateY(3px)}.char-btn.done{background:#dde7d5;color:#677c5d;border-color:#c2d1b7;opacity:.7;box-shadow:none;transform:scale(.95)}.char-btn.playing{background:#f9e3ae;color:var(--ink);border-color:#a4823c;animation:none}.char-btn.empty{opacity:.2}.nav-btn{box-shadow:none;border-radius:14px;margin:0;font-size:19px}#footer-nav{gap:16px;max-width:800px;width:100%;align-self:center;height:64px;margin-top:0}#btn-prev{background:#dce6d5;color:#405a3a;border:1px solid #b9caae;max-width:150px}#btn-next{background:var(--green)!important;font-size:22px}#page-image{border-radius:16px;border:5px solid white;box-shadow:0 4px 15px #203d3a12}
+@media(min-width:1500px){.studio-layout{grid-template-columns:340px minmax(0,1fr)}#recording-area{grid-template-columns:repeat(auto-fill,minmax(250px,1fr))}}
+@media(max-width:1100px){.setup-header{padding:16px 24px}.setup-content{padding:25px 24px}.studio-layout{grid-template-columns:275px minmax(0,1fr);gap:16px}.script-panel{padding:18px}#audio-panel,#images-panel{padding:20px}.asset-tabs{padding:0 20px}.slot-group>.eyebrow{display:none}.audio-heading h2{font-size:16px}.audio-heading p{font-size:10px}.action-area{padding-left:24px;padding-right:24px}.footer-note{font-size:11px}#recording-area{grid-template-columns:repeat(auto-fill,minmax(218px,1fr))}.rec-controls .btn-common{font-size:10px}}
+@media(max-width:900px){.setup-header{height:80px;padding:12px 18px;gap:10px}.brand{font-size:21px;gap:8px}.brand-mark{height:41px;width:37px;border-radius:12px 12px 12px 4px}.brand-mark svg{width:25px}.brand small{font-size:8px}.slot-btn{width:32px;height:35px;border-radius:8px;font-size:12px}#slot-container{gap:3px}.help-button{height:35px;width:35px;justify-content:center;padding:0}.help-button span{display:none}.setup-content{padding:23px 18px}.workspace-heading{margin-bottom:20px}.workspace-heading h1{font-size:24px}.workspace-heading p{font-size:10px}.preparation-tag{display:none}.mobile-nav{display:flex;gap:6px;padding:4px;background:#e6ece2;border-radius:11px;margin-bottom:16px}.mobile-nav button{flex:1;border:0;border-radius:8px;background:transparent;color:var(--muted);height:40px;font-size:12px;font-weight:600}.mobile-nav .selected{background:white;color:var(--green);box-shadow:0 2px 6px #2849320a}.studio-layout{display:block}.studio-layout[data-mobile-panel=script] .assets-panel{display:none}.studio-layout:not([data-mobile-panel=script]) .script-panel{display:none}.asset-tabs{display:none}.assets-panel{min-height:0}.script-panel{padding:22px}.panel-heading{margin-bottom:22px}#audio-panel,#images-panel{padding:20px 16px}.audio-heading{gap:8px}.audio-heading h2{font-size:16px}.audio-heading p{font-size:10px;max-width:240px}.audio-total strong{font-size:23px}.audio-total{min-width:60px}.audio-toolbar{gap:8px;flex-wrap:wrap}.search-field{flex:1;max-width:none}.missing-filter{font-size:10px}#visible-count{font-size:9px}#recording-area{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.rec-item{padding:10px;gap:10px}.rec-char{font-size:25px;min-width:37px;height:39px}.rec-status{font-size:8px}.rec-controls{grid-template-columns:1fr 1fr 32px;gap:5px}.rec-controls .btn-common{height:36px;min-height:36px;font-size:10px}.rec-controls .btn-rec{grid-column:1 / 3;grid-row:1}.rec-controls .btn-delete{grid-column:3;grid-row:1}.rec-controls .btn-play{grid-column:1;grid-row:2}.rec-controls .btn-file-load{grid-column:2 / 4;grid-row:2}.action-area{padding:12px 18px calc(12px + env(safe-area-inset-bottom));gap:9px}.footer-note{display:none}.btn-save,.btn-start{min-height:47px;padding:10px 13px;font-size:12px}.btn-save{flex:1}.btn-start{flex:1.6;gap:10px;justify-content:space-between}.status-msg{bottom:90px;font-size:11px}.field-hint{font-size:11px}textarea{font-size:16px;min-height:210px}.img-header{flex-wrap:wrap}.img-header-title{overflow-wrap:anywhere}#app-screen{padding:16px 16px calc(16px + env(safe-area-inset-bottom))}#agenda-title{font-size:16px;max-width:calc(100vw - 125px);text-align:center;padding:9px 14px}.stage-guide{font-size:12px}#char-container{padding:10px;gap:13px}.char-btn{width:78px;height:78px;font-size:39px;border-radius:17px}#footer-nav{height:58px}.nav-btn{font-size:16px}#btn-next{font-size:20px}}
+@media(max-width:370px){.setup-header{padding:12px}.brand{font-size:18px}.brand small{display:none}.brand-mark{display:none}.setup-content{padding:20px 12px}#audio-panel{padding:17px 12px}.audio-heading h2{font-size:14px}.rec-status{font-size:8px}.rec-item{padding:8px}.rec-char{font-size:24px}.action-area{padding-left:12px;padding-right:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+.rec-controls{grid-template-columns:1fr 1fr 1fr 40px}.rec-controls .btn-common{min-height:44px;height:44px}.rec-controls .btn-delete{width:40px;font-size:10px}.rec-char.long-label{font-size:14px;height:auto;min-height:43px;white-space:normal;padding:8px}.record-dot{width:7px;height:7px;background:currentColor;border-radius:50%;margin-right:3px}.rec-item:has(.recording){border-color:#c25847;background:#fffbf9}.rec-controls .btn-play[aria-label]{letter-spacing:0}
+@media(max-width:900px){.rec-controls{grid-template-columns:1fr 1fr 40px}.rec-controls .btn-common{min-height:44px;height:44px}.rec-controls .btn-delete{width:40px}}
+@media(max-width:500px){.setup-header{height:72px;padding:12px;gap:8px}.brand{font-size:17px;white-space:nowrap;flex-shrink:0;gap:6px}.brand small{display:none}.brand-mark{width:30px;height:35px;flex-shrink:0}.brand-mark svg{width:21px}.slot-btn{width:28px;height:33px;font-size:11px}.help-button{width:30px;height:33px;flex-shrink:0}.slot-group{min-width:0}.workspace-heading h1{font-size:23px}}
+@media(max-width:360px){.brand-mark{display:none}.setup-header{gap:6px}}
+
+@media(min-width:600px) and (max-width:900px){#recording-area{grid-template-columns:repeat(3,minmax(0,1fr))}.rec-controls{grid-template-columns:1fr 1fr 1fr 40px}.rec-controls .btn-rec,.rec-controls .btn-delete,.rec-controls .btn-play,.rec-controls .btn-file-load{grid-column:auto;grid-row:auto}}
+
+/* Child-operated MC stage: bright, tactile, and one clear next character. */
+#app-screen{isolation:isolate;overflow:hidden;background:#c9efff;background-image:linear-gradient(180deg,#b8eaff 0%,#e8f9ff 75%,#fff7db 100%);color:#204c72;padding:24px 28px calc(22px + env(safe-area-inset-bottom));gap:0}
+#app-screen::before,#app-screen::after{content:"";position:absolute;z-index:-1;pointer-events:none;border-radius:50%}#app-screen::before{width:65vw;height:240px;left:-14vw;bottom:-175px;background:#a9df8d;transform:rotate(8deg)}#app-screen::after{width:65vw;height:230px;right:-15vw;bottom:-170px;background:#c9eaa0;transform:rotate(-9deg)}
+.stage-decoration{position:absolute;inset:0;z-index:-1;pointer-events:none;overflow:hidden}.morning-sun{position:absolute;left:7%;top:4%;width:95px;height:95px;color:#ffbd3d}.morning-cloud{position:absolute;right:9%;top:7%;width:116px;height:33px;background:#fff;border-radius:40px;opacity:.95}.morning-cloud::before,.morning-cloud::after{content:"";position:absolute;background:#fff;border-radius:50%;bottom:12px}.morning-cloud::before{width:48px;height:48px;left:18px}.morning-cloud::after{width:38px;height:38px;right:17px}
+#header-area{min-height:96px;margin-bottom:10px;gap:8px;flex-shrink:0}.stage-heading-label{font-size:13px;font-weight:750;letter-spacing:.14em;color:#285679;display:flex;gap:8px;align-items:center}.stage-heading-label svg{height:23px;width:23px;color:#cb7712}#agenda-title{border:3px solid #fff;border-radius:20px;background:#fff;color:#17458b;font-size:26px;font-weight:800;max-width:calc(100vw - 170px);text-align:center;padding:10px 30px;box-shadow:0 5px 0 #88c7dc;line-height:1.5;overflow-wrap:anywhere}#page-position{position:absolute;right:52px;top:21px;font-size:14px;letter-spacing:.08em;color:#295375;background:#ffffffd9;border:1px solid #fff;border-radius:30px;padding:8px 16px;font-weight:700}
+#app-screen .stage-guide{align-self:center;text-align:center;color:#285679;font-size:18px;font-weight:750;letter-spacing:.08em;margin:13px 0 16px;line-height:1.6;flex-shrink:0}.stage-guide::before{content:"●";color:#b36b06;font-size:14px;vertical-align:2px;margin-right:9px}#app-screen.stage-complete .stage-guide{color:#236a56}.stage-complete .stage-guide::before{content:"✓";font-size:22px;vertical-align:0}
+#char-container{position:relative;flex:1;min-height:0;width:min(1200px,100%);align-self:center;border:2px solid #fff;border-radius:32px;background:#fffdf3;box-shadow:0 8px 0 #88c7dc;padding:30px 24px;gap:20px;align-content:center;overflow-x:hidden;overflow-y:auto;scroll-padding:36px}
+#app-screen .char-btn{width:112px;height:116px;border:3px solid #c3d8f5;border-radius:23px;background:#fff;color:#1c4787;font-size:58px;font-weight:800;box-shadow:0 6px 0 #b2caeb;opacity:1!important;transform:none;animation:none;position:relative;line-height:1;transition:background .15s,transform .15s;overflow:visible;cursor:default}
+#app-screen .char-btn.current{color:#15356a;background:#ffdd57;border:4px solid #92521a;box-shadow:0 7px 0 #c28b25,0 0 0 6px #fff;transform:translateY(-4px);cursor:pointer;z-index:2}
+#app-screen .char-btn.current::before{content:"ここ！";position:absolute;top:-21px;left:50%;transform:translateX(-50%);background:#b13b31;color:#fff;border:2px solid white;border-radius:20px;font-size:13px;font-weight:800;padding:5px 12px;white-space:nowrap;line-height:1.2;letter-spacing:.02em;box-shadow:0 2px 0 #913027}
+#app-screen .char-btn.current:active{background:#ffc62f;transform:translateY(3px);box-shadow:0 1px 0 #b77d1c,0 0 0 6px #fff}
+#app-screen .char-btn.done{background:#c7e8e6;border-color:#aed2d5;color:#467675;box-shadow:0 3px 0 #aacdd3;transform:scale(.94);opacity:1!important}
+#app-screen .char-btn.done::after{content:"✓";position:absolute;right:-4px;top:-7px;border:2px solid white;border-radius:50%;height:24px;width:24px;display:grid;place-items:center;background:#247778;color:white;font-size:15px;line-height:1;font-weight:800}
+#app-screen .char-btn.playing{background:#ffd8eb;color:#77275b;border:4px solid #bd3e82;box-shadow:0 6px 0 #ce91ba;animation:none;cursor:pointer}
+#app-screen .char-btn.long-text{width:auto;min-width:112px;max-width:100%;height:auto;min-height:116px;padding:16px 24px;font-size:32px;white-space:normal;overflow-wrap:anywhere;line-height:1.5}
+#app-screen .char-btn.small-text{font-size:43px;letter-spacing:-3px}#app-screen .char-btn.empty{border:0;background:transparent;box-shadow:none;pointer-events:none;opacity:0!important}
+.stage-progress-wrap{display:flex;align-items:center;justify-content:center;gap:14px;padding:19px 0 14px;flex-shrink:0}.stage-meter{width:140px;height:11px;border-radius:20px;background:#e8f5fa;border:1px solid #78b6cf;overflow:hidden}.stage-meter>div{height:100%;background:#f4a530;border-radius:20px;transition:width .25s}#app-screen .stage-progress{font-size:13px;color:#285679;letter-spacing:.04em;padding:0;font-weight:650;min-width:82px}.stage-complete .stage-meter>div{background:#8bf0cd}
+#footer-nav{width:min(850px,100%);height:72px;gap:17px;flex-shrink:0;margin-top:0}.nav-btn{border-radius:22px;font-weight:800;letter-spacing:.04em}#btn-next{background:#ffb36c!important;color:#17396e;font-size:28px;border:3px solid #fff4d5;box-shadow:0 6px 0 #c87d3c}#btn-next:active{transform:translateY(4px);box-shadow:0 2px 0 #c87d3c}#btn-prev{background:#fff;color:#28599c;border:3px solid #bbd6ff;font-size:21px;max-width:165px;box-shadow:0 6px 0 #88c7dc}#app-screen.stage-complete #btn-next{background:#a6f0d8!important;border-color:#d9fff2;box-shadow:0 6px 0 #1c8b7d}
+.secret-setting-btn{width:48px;height:48px;top:9px;color:#3b779b;opacity:.65;font-size:22px;clip-path:none!important}.secret-setting-btn.left{left:9px}.secret-setting-btn.right{right:9px}#page-image{max-height:22dvh;border:5px solid #fff;border-radius:20px;box-shadow:0 5px 0 #88c7dc}#image-area{margin-bottom:15px}#char-container.with-image{padding-top:30px;align-content:center}
+#app-screen #char-container.compact-mode .char-btn{width:80px;height:83px;min-height:0;font-size:40px;border-width:3px;border-radius:17px}#app-screen #char-container.compact-mode .char-btn.small-text{font-size:29px}#app-screen #char-container.compact-mode .char-btn.long-text{width:auto;min-width:80px;height:auto;min-height:83px;font-size:24px;padding:10px 16px}
+@media(max-width:700px){#app-screen{padding:16px 15px calc(18px + env(safe-area-inset-bottom))}#header-area{min-height:90px;margin-bottom:0;gap:6px}.stage-heading-label{font-size:11px}.stage-heading-label svg{width:20px;height:20px}#agenda-title{font-size:20px;padding:9px 18px;border-radius:17px;max-width:calc(100vw - 105px)}#page-position{position:static;font-size:10px;padding:4px 10px}#app-screen .stage-guide{font-size:14px;margin:13px 0 16px;letter-spacing:.03em}#char-container{border-radius:25px;padding:29px 14px;gap:17px 13px}#app-screen .char-btn{width:86px;height:91px;font-size:46px;border-radius:19px}#app-screen .char-btn.small-text{font-size:34px}#app-screen .char-btn.long-text{min-width:86px;min-height:91px;font-size:25px;padding:12px 17px}#app-screen .char-btn.current::before{font-size:11px;padding:4px 9px;top:-19px}#footer-nav{height:61px;gap:12px}#btn-next{font-size:23px;border-radius:18px}#btn-prev{font-size:16px;max-width:100px;border-radius:18px}.stage-progress-wrap{padding:16px 0 13px;gap:11px}#app-screen .stage-progress{font-size:11px}.stage-meter{width:100px;height:9px}.morning-sun{left:2%;top:3%;width:58px;height:58px}.morning-cloud{right:1%;top:8%;width:67px;height:20px}.morning-cloud::before{width:30px;height:30px;left:9px;bottom:7px}.morning-cloud::after{width:25px;height:25px;right:8px;bottom:7px}#app-screen #char-container.compact-mode .char-btn{width:61px;height:66px;font-size:32px;border-radius:14px}#app-screen #char-container.compact-mode .char-btn.small-text{font-size:23px}#app-screen #char-container.compact-mode .char-btn.long-text{min-width:61px;min-height:66px;font-size:20px}#page-image{max-height:20dvh}}
+@media(max-height:550px) and (orientation:landscape){#app-screen{padding:10px 18px 14px}#header-area{min-height:47px;flex-direction:row;gap:15px}#agenda-title{font-size:17px;padding:5px 16px}#page-position{position:static;padding:4px 10px;font-size:11px}.stage-heading-label{font-size:10px}#app-screen .stage-guide{font-size:12px;margin:5px 0 9px}#char-container{padding:26px 15px 13px;gap:15px;border-radius:22px}#app-screen .char-btn{width:76px;height:78px;font-size:39px;border-radius:16px}#app-screen .char-btn.small-text{font-size:30px}#app-screen .char-btn.long-text{min-height:78px;font-size:24px}.stage-progress-wrap{padding:9px 0}#footer-nav{height:48px}#btn-next{font-size:21px}.stage-decoration{display:none}}
+@media(prefers-reduced-motion:reduce){#app-screen *,#app-screen *::before,#app-screen *::after{animation:none!important;transition:none!important}}
+/* The stage itself never scrolls; only the character board may scroll. */
+#app-screen{overflow:clip}
+
+    /* The same five palettes drive the real stage and its teacher-facing previews. */
+#app-screen,.theme-choice{--stage-bg:#c9efff;--stage-image:linear-gradient(180deg,#b8eaff,#e8f9ff 75%,#fff7db);--stage-ink:#285679;--stage-board:#fffdf3;--stage-board-border:#fff;--stage-shadow:#88c7dc;--stage-title:#fff;--stage-title-ink:#17458b;--stage-nav:#ffb36c;--stage-nav-shadow:#c87d3c;--stage-hill-left:#a9df8d;--stage-hill-right:#c9eaa0;--stage-meter:#e8f5fa;--stage-meter-border:#78b6cf;--stage-mic:#cb7712;--stage-gear:#3b779b;--stage-current:#ffdd57;--stage-outer-border:0 solid transparent}
+:is(#app-screen,.theme-choice)[data-theme=blackboard]{--stage-bg:#285d4c;--stage-image:radial-gradient(ellipse at 40% 0%,#3d755e80,transparent 80%);--stage-ink:#fffbea;--stage-board:#235440;--stage-board-border:#c5dbc180;--stage-shadow:#173f32;--stage-title:#f8f3d9;--stage-title-ink:#254c3e;--stage-nav:#ffdc72;--stage-nav-shadow:#99702e;--stage-hill-left:transparent;--stage-hill-right:transparent;--stage-meter:#153d31;--stage-meter-border:#9dbb9f;--stage-mic:#ffe18b;--stage-gear:#fffbea;--stage-outer-border:10px solid #b77e4b}
+:is(#app-screen,.theme-choice)[data-theme=sunset]{--stage-bg:#ffe0c7;--stage-image:linear-gradient(180deg,#ffc5a5,#ffe7cb 70%,#fff1d9);--stage-ink:#763e31;--stage-board:#fffaf0;--stage-board-border:#fff6e5;--stage-shadow:#dda481;--stage-title:#fffaf0;--stage-title-ink:#783e2d;--stage-nav:#ffd17c;--stage-nav-shadow:#bb8240;--stage-hill-left:#efb38c;--stage-hill-right:#e9c991;--stage-meter:#fff0da;--stage-meter-border:#cf9875;--stage-mic:#af572b;--stage-gear:#8d513d;--stage-current:#ffdc72}
+:is(#app-screen,.theme-choice)[data-theme=notebook]{--stage-bg:#fffdf5;--stage-image:repeating-linear-gradient(180deg,transparent 0,transparent 31px,#d6e7f2 32px,#d6e7f2 33px);--stage-ink:#36516a;--stage-board:#fffefa;--stage-board-border:#c7d9e5;--stage-shadow:#bdceda;--stage-title:#fff;--stage-title-ink:#334f68;--stage-nav:#bfe7f5;--stage-nav-shadow:#81b4c9;--stage-hill-left:transparent;--stage-hill-right:transparent;--stage-meter:#eef4f7;--stage-meter-border:#a8c2d3;--stage-mic:#b17217;--stage-gear:#52758e}
+:is(#app-screen,.theme-choice)[data-theme=colorful]{--stage-bg:#f0e6ff;--stage-image:linear-gradient(135deg,#f4eaff,#e8edff 60%,#e1f7f1);--stage-ink:#514477;--stage-board:#fffdfb;--stage-board-border:#fff;--stage-shadow:#bab1d9;--stage-title:#fff;--stage-title-ink:#514477;--stage-nav:#ffc3a5;--stage-nav-shadow:#ca8c72;--stage-hill-left:#ffd47e;--stage-hill-right:#9bdfd0;--stage-meter:#f3effa;--stage-meter-border:#b7a7d2;--stage-mic:#95652b;--stage-gear:#766494}
+#app-screen{background:var(--stage-bg);background-image:var(--stage-image);color:var(--stage-ink);border:var(--stage-outer-border)}#app-screen::before{background:var(--stage-hill-left)}#app-screen::after{background:var(--stage-hill-right)}#app-screen .stage-heading-label,#app-screen .stage-guide,#app-screen .stage-progress{color:var(--stage-ink)}#app-screen .stage-heading-label svg{color:var(--stage-mic)}#app-screen #agenda-title{background:var(--stage-title);color:var(--stage-title-ink);box-shadow:0 5px 0 var(--stage-shadow)}#app-screen #page-position{background:var(--stage-title);color:var(--stage-title-ink);border-color:var(--stage-board-border)}#app-screen #char-container{background:var(--stage-board);border-color:var(--stage-board-border);box-shadow:0 8px 0 var(--stage-shadow)}#app-screen .stage-meter{background:var(--stage-meter);border-color:var(--stage-meter-border)}#app-screen #btn-next{background:var(--stage-nav)!important;box-shadow:0 6px 0 var(--stage-nav-shadow)}#app-screen #btn-prev{box-shadow:0 6px 0 var(--stage-shadow)}#app-screen #page-image{box-shadow:0 5px 0 var(--stage-shadow)}#app-screen .stage-guide::before{color:var(--stage-mic)}#app-screen .char-btn.current{background:var(--stage-current)}
+#app-screen:not([data-theme=morning]):not([data-theme=sunset]) .morning-sun,#app-screen:not([data-theme=morning]):not([data-theme=sunset]) .morning-cloud{display:none}#app-screen[data-theme=sunset] .morning-sun{color:#f99a4e}#app-screen[data-theme=sunset] .morning-cloud,#app-screen[data-theme=sunset] .morning-cloud::before,#app-screen[data-theme=sunset] .morning-cloud::after{background:#fff2e0}
+#app-screen[data-theme=blackboard] #char-container{border-style:dashed;border-radius:19px}#app-screen[data-theme=blackboard] #agenda-title{border-color:#e7e0be;border-radius:12px}#app-screen[data-theme=blackboard] .stage-decoration{display:none}#app-screen[data-theme=blackboard].stage-complete .stage-guide{color:#ffed9b}
+#app-screen[data-theme=notebook] #char-container{border-radius:12px}#app-screen[data-theme=notebook] .stage-decoration::before{content:"";position:absolute;left:34px;top:0;bottom:0;width:2px;background:#efb5ac;opacity:.65}#app-screen[data-theme=notebook] .stage-decoration::after{content:"";position:absolute;right:8%;top:6%;width:16px;height:90px;border:3px solid #bf8e45;border-radius:4px 4px 10px 10px;background:linear-gradient(90deg,#ffe095 50%,#ffca61 50%);transform:rotate(32deg)}
+#app-screen[data-theme=colorful] .stage-decoration::before{content:"";position:absolute;left:7%;top:8%;width:39px;height:39px;border:12px solid #f69f98;border-radius:50%}#app-screen[data-theme=colorful] .stage-decoration::after{content:"";position:absolute;right:9%;top:7%;width:49px;height:49px;background:#a5dcd2;border-radius:11px;transform:rotate(17deg)}
+/* Restore the original large gear, clipped into left and right halves. */
+#app-screen .secret-setting-btn{top:-15px;width:120px;height:120px;font-size:70px;color:var(--stage-gear);opacity:.65;touch-action:none;user-select:none;-webkit-user-select:none;z-index:100;line-height:1}
+#app-screen .secret-setting-btn.left{left:-15px;clip-path:inset(0 50% 0 0)!important}#app-screen .secret-setting-btn.right{right:-15px;clip-path:inset(0 0 0 50%)!important}
+#app-screen .secret-setting-btn:active{opacity:1}
+/* Appearance choices belong to the teacher's workspace. */
+#theme-panel{padding:24px}#theme-choices{display:grid;grid-template-columns:repeat(auto-fit,minmax(185px,1fr));gap:14px}.theme-choice{display:block;border:2px solid #e0e7de;border-radius:13px;overflow:hidden;cursor:pointer;position:relative;background:white;min-width:0}.theme-choice:has(input:checked){border-color:#216b56;box-shadow:0 0 0 2px #216b5618}.theme-choice:focus-within{outline:3px solid #368dcb;outline-offset:3px}.theme-choice input{position:absolute;width:1px;height:1px;opacity:0;left:12px;top:12px}.theme-thumb{height:137px;display:flex;align-items:center;flex-direction:column;gap:10px;padding:12px;position:relative;overflow:hidden;background:var(--stage-bg);background-image:var(--stage-image);border:var(--stage-outer-border);color:var(--stage-ink)}.thumb-title{font-size:8px;font-weight:700;background:var(--stage-title);color:var(--stage-title-ink);border-radius:5px;padding:4px 10px;z-index:1}.thumb-letters{display:flex;gap:6px;z-index:1}.thumb-letters b{font-size:22px;width:33px;height:35px;border:1px solid #bacfe1;border-radius:7px;background:white;color:#1c4787;display:grid;place-items:center;box-shadow:0 3px 0 #adc4dc}.thumb-letters b:first-child{background:var(--stage-current);border-color:#a37230}.thumb-next{font-size:8px;color:#17396e;font-weight:700;width:92px;text-align:center;padding:5px 0;border-radius:6px;background:var(--stage-nav);z-index:1}.theme-caption{padding:13px 12px;display:grid;grid-template-columns:1fr auto;gap:6px}.theme-caption strong{font-size:13px}.theme-caption small{grid-column:1 / -1;color:#667a75;font-size:10px;line-height:1.7}.theme-selected{font-size:10px;color:#667a75;white-space:nowrap}.theme-choice:has(input:checked) .theme-selected{color:#216b56;font-weight:700}.theme-preview-action{margin-top:22px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;font-size:12px}.theme-try{min-height:44px;background:#216b56;color:white;border:0;border-radius:9px;padding:10px 16px;font-size:12px;font-weight:650}.theme-help{font-size:11px;color:#667a75;line-height:1.9;margin-top:13px}.thumb-decoration{position:absolute;left:12px;top:12px;width:19px;height:19px;border-radius:50%;background:#ffbe42}.theme-choice[data-theme=blackboard] .thumb-decoration{display:none}.theme-choice[data-theme=blackboard] .theme-thumb{padding:8px;gap:7px}.theme-choice[data-theme=sunset] .thumb-decoration{background:#f59751}.theme-choice[data-theme=notebook] .thumb-decoration{height:70px;width:2px;left:14px;top:0;border-radius:0;background:#edb6ad}.theme-choice[data-theme=colorful] .thumb-decoration{background:#ec9f9b;border-radius:4px;transform:rotate(20deg)}
+@media(max-width:1100px){.asset-tabs{gap:18px}.asset-tabs button{font-size:12px}#theme-panel{padding:20px}}
+@media(max-width:900px){#theme-panel{padding:20px 16px}.mobile-nav{gap:3px}.mobile-nav button{font-size:11px}#theme-choices{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.theme-thumb{height:129px;padding:12px 7px}.theme-caption{padding:11px 9px;gap:5px}.theme-caption strong{font-size:12px}.theme-caption small{font-size:10px}.theme-selected{font-size:9px}.theme-preview-action>span{width:100%}.theme-try{width:100%}}
+@media(max-width:700px){#app-screen[data-theme=notebook] .stage-decoration::after{display:none}#app-screen[data-theme=colorful] .stage-decoration::before{left:5%;top:4%;width:26px;height:26px;border-width:8px}#app-screen[data-theme=colorful] .stage-decoration::after{right:5%;top:6%;width:30px;height:30px}#app-screen #agenda-title{max-width:calc(100vw - 130px)}#app-screen[data-theme=blackboard]{border-width:8px}}
+@media(max-width:700px){#app-screen .morning-sun{left:7%;top:112px;width:30px;height:30px}#app-screen .morning-cloud{right:7%;top:126px;width:54px;height:13px}#app-screen .morning-cloud::before{width:22px;height:22px;bottom:5px;left:7px}#app-screen .morning-cloud::after{width:18px;height:18px;bottom:5px;right:7px}}
+/* Teacher controls on phones favor a compact overview. Child-stage targets stay large. */
+@media(max-width:600px){
+#setup-screen .setup-header{height:58px;padding:8px 10px;gap:7px}#setup-screen .brand{font-size:16px;gap:5px}#setup-screen .brand-mark{height:31px;width:27px}#setup-screen .brand-mark svg{width:19px}#setup-screen .slot-btn{height:29px;width:27px}#setup-screen .help-button{height:29px;width:28px}
+#setup-screen .setup-content{padding:12px 10px 15px}#setup-screen .workspace-heading{margin-bottom:10px}#setup-screen .workspace-heading .eyebrow{display:none}#setup-screen .workspace-heading h1{font-size:20px;margin:0 0 4px}#setup-screen .workspace-heading p{font-size:10px;line-height:1.5}
+#setup-screen .mobile-nav{margin-bottom:10px;padding:3px;gap:3px;border-radius:9px}#setup-screen .mobile-nav button{height:31px;border-radius:6px;font-size:11px}
+#setup-screen .panel{border-radius:12px}#setup-screen #audio-panel,#setup-screen #images-panel,#setup-screen #theme-panel{padding:12px 10px}#setup-screen .audio-heading{margin-bottom:11px;gap:8px}#setup-screen .audio-heading h2{font-size:14px;line-height:1.5}#setup-screen .audio-heading p{font-size:10px;margin-top:4px;line-height:1.5}#setup-screen .audio-total strong{font-size:21px}#setup-screen .audio-total small{font-size:8px}#setup-screen .audio-total{min-width:53px}#setup-screen .progress-track{height:3px;margin-bottom:12px}#setup-screen .audio-toolbar{margin-bottom:10px;gap:7px}#setup-screen .search-field{height:33px;padding:0 7px;border-radius:6px}#setup-screen .search-field input{padding:5px;font-size:16px}#setup-screen .search-field input::placeholder{font-size:11px}#setup-screen .search-field>span{font-size:22px}#setup-screen .missing-filter{font-size:10px;gap:3px}#setup-screen #visible-count{font-size:9px}
+#setup-screen #recording-area{gap:7px;grid-template-columns:repeat(2,minmax(0,1fr))}#setup-screen .rec-item{position:relative;padding:8px;gap:8px;border-radius:9px}#setup-screen .rec-header{min-height:30px;gap:4px}#setup-screen .rec-char{min-width:30px;height:30px;font-size:22px;padding:0 5px;border-radius:6px}#setup-screen .rec-char.long-label{font-size:11px;min-height:30px;height:auto;max-width:calc(100% - 36px);padding:5px}#setup-screen .rec-status{font-size:8px;margin-right:26px;gap:3px}#setup-screen .rec-status:before{width:4px;height:4px}#setup-screen .rec-controls{grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}#setup-screen .rec-controls .btn-common{grid-column:auto;grid-row:auto;min-height:32px;height:32px;font-size:9px;padding:0 2px;border-radius:5px;gap:1px}#setup-screen .rec-controls .btn-delete{position:absolute;right:6px;top:9px;min-height:27px;height:27px;width:27px;font-size:8px;background:#fff;border-color:#e6eae2}#setup-screen .record-dot{width:5px;height:5px;margin-right:1px}#setup-screen .audio-note{margin-top:12px;padding-top:10px;font-size:9px}
+#setup-screen #theme-choices{display:grid;grid-template-columns:1fr;gap:6px}#setup-screen .theme-choice{display:grid;grid-template-columns:90px minmax(0,1fr);border-radius:8px;min-height:64px}#setup-screen .theme-thumb{height:62px;min-height:62px;padding:5px;gap:3px;justify-content:center;border-width:4px}#setup-screen .thumb-title{font-size:5px;padding:2px 5px;border-radius:3px}#setup-screen .thumb-letters{gap:3px}#setup-screen .thumb-letters b{font-size:14px;width:20px;height:20px;border-radius:4px;box-shadow:0 1px 0 #adc4dc}#setup-screen .thumb-next{font-size:5px;width:48px;padding:2px 0;border-radius:3px}#setup-screen .thumb-decoration{width:10px;height:10px;top:6px;left:6px}#setup-screen .theme-choice[data-theme=blackboard] .theme-thumb{padding:4px;gap:3px}#setup-screen .theme-caption{padding:8px 9px;gap:3px;align-content:center}#setup-screen .theme-caption strong{font-size:12px}#setup-screen .theme-caption small{font-size:9px;line-height:1.5}#setup-screen .theme-selected{font-size:9px}#setup-screen .theme-preview-action{margin-top:12px;gap:7px;flex-wrap:nowrap;font-size:10px}#setup-screen .theme-preview-action>span{width:auto;flex-shrink:0}#setup-screen .theme-try{width:auto;min-height:34px;padding:7px 9px;font-size:10px;margin-left:auto}#setup-screen .theme-help{margin-top:8px;font-size:9px;line-height:1.6}
+#setup-screen .script-panel{padding:13px}#setup-screen .panel-heading{gap:9px;margin-bottom:15px}#setup-screen .panel-heading h2{font-size:14px}#setup-screen .step-number{height:28px;width:28px;font-size:10px}#setup-screen .script-label{margin-bottom:8px}#setup-screen #config-text{min-height:160px;height:180px;padding:9px;font-size:16px;line-height:1.8}#setup-screen .field-hint{margin:8px 0 15px;font-size:10px;line-height:1.7}#setup-screen .script-preview{padding-top:12px}#setup-screen .preview-page{padding:7px 0;font-size:10px}#setup-screen .data-actions{margin-top:14px;gap:7px}#setup-screen .btn-small-action{min-height:31px;padding:6px;font-size:10px}#setup-screen .backup-hint{margin-top:6px;font-size:8px}
+#setup-screen .img-item{padding:10px;border-radius:8px;margin-bottom:8px}#setup-screen .img-header{font-size:11px;gap:7px}#setup-screen .img-switch-label{min-height:31px;padding:3px 7px;font-size:10px}#setup-screen .img-content{margin-top:7px;padding-top:7px;gap:7px}
+#setup-screen .action-area{padding:8px 10px calc(8px + env(safe-area-inset-bottom));gap:7px}#setup-screen .btn-save,#setup-screen .btn-start{min-height:38px;padding:7px 10px;font-size:11px;border-radius:8px}#setup-screen .btn-start span{font-size:18px}#setup-screen .status-msg{bottom:70px;padding:9px 13px;font-size:10px}
+}
+/* Dense adult workspace: scale the entire hierarchy, not only the controls. */
+@media(min-width:601px){
+#setup-screen .setup-header{height:64px;padding:10px 20px;gap:16px}#setup-screen .brand{font-size:21px;gap:9px}#setup-screen .brand-mark{width:34px;height:38px;border-radius:10px 10px 10px 4px}#setup-screen .brand-mark svg{width:24px;height:24px}#setup-screen .brand small{font-size:9px;margin-top:3px}#setup-screen .slot-btn{height:33px;width:34px;font-size:12px;border-radius:8px}#setup-screen #slot-container{gap:5px}#setup-screen .slot-group{gap:12px}#setup-screen .help-button{height:33px;padding:0 12px;font-size:11px}
+#setup-screen .setup-content{padding:14px 20px 18px}#setup-screen .workspace-heading{margin-bottom:12px}#setup-screen .workspace-heading .eyebrow{display:none}#setup-screen .workspace-heading h1{font-size:22px;margin:0 0 4px;line-height:1.4}#setup-screen .workspace-heading p{font-size:10px;line-height:1.5}#setup-screen .preparation-tag{font-size:10px;padding:6px 10px}#setup-screen .studio-layout{gap:14px}#setup-screen .panel{border-radius:12px}#setup-screen .script-panel{padding:14px}#setup-screen .panel-heading{gap:9px;margin-bottom:17px}#setup-screen .panel-heading h2{font-size:14px}#setup-screen .panel-heading p{font-size:9px;margin-top:2px}#setup-screen .step-number{width:28px;height:28px;font-size:10px;border-radius:7px}#setup-screen .script-label{margin-bottom:8px;font-size:10px}#setup-screen #config-text{height:180px;min-height:150px;padding:10px;font-size:13px;line-height:1.8;border-radius:7px}#setup-screen .field-hint{font-size:9px;line-height:1.7;margin:8px 0 15px}#setup-screen .script-preview{padding-top:12px}#setup-screen .script-preview>.eyebrow{font-size:9px;margin-bottom:6px}#setup-screen .preview-page{padding:7px 0;font-size:10px;gap:7px}#setup-screen .data-actions{margin-top:14px;gap:7px}#setup-screen .btn-small-action{min-height:31px;font-size:10px;padding:6px}#setup-screen .backup-hint{margin-top:6px;font-size:8px}
+#setup-screen .asset-tabs{padding:0 15px;gap:21px}#setup-screen .asset-tabs button{height:43px;font-size:12px;padding:0 2px}#setup-screen .asset-tabs button>span{font-size:9px;margin-right:5px}#setup-screen .asset-tabs b{font-size:9px;padding:2px 5px;margin-left:4px}#setup-screen .assets-panel{min-height:0}#setup-screen #audio-panel,#setup-screen #images-panel,#setup-screen #theme-panel{padding:15px}#setup-screen .audio-heading{margin-bottom:12px;gap:10px}#setup-screen .audio-heading h2{font-size:16px;line-height:1.5}#setup-screen .audio-heading p{font-size:10px;margin-top:4px;line-height:1.6}#setup-screen .audio-total{min-width:60px}#setup-screen .audio-total strong{font-size:23px}#setup-screen .audio-total small{font-size:8px}#setup-screen .progress-track{height:3px;margin-bottom:13px}#setup-screen .audio-toolbar{gap:10px;margin-bottom:12px}#setup-screen .search-field{height:33px;border-radius:6px;padding:0 8px;max-width:220px}#setup-screen .search-field input{padding:5px 6px;font-size:11px}#setup-screen .search-field>span{font-size:22px}#setup-screen .missing-filter{font-size:10px;gap:4px}#setup-screen #visible-count{font-size:9px}
+#setup-screen #recording-area{grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:8px}#setup-screen .rec-item{position:relative;padding:9px;gap:8px;border-radius:9px}#setup-screen .rec-header{min-height:32px;gap:5px}#setup-screen .rec-char{font-size:24px;height:32px;min-width:32px;padding:0 6px;border-radius:6px}#setup-screen .rec-char.long-label{font-size:12px;min-height:32px;height:auto;max-width:calc(100% - 38px);padding:5px}#setup-screen .rec-status{font-size:9px;margin-right:29px;gap:3px}#setup-screen .rec-controls{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}#setup-screen .rec-controls .btn-common{grid-column:auto;grid-row:auto;min-height:32px;height:32px;font-size:10px;padding:0 3px;border-radius:6px}#setup-screen .rec-controls .btn-delete{position:absolute;right:7px;top:10px;width:28px;height:28px;min-height:28px;font-size:9px;background:white}#setup-screen .record-dot{width:6px;height:6px;margin-right:2px}#setup-screen .audio-note{padding-top:10px;margin-top:13px;font-size:9px}
+#setup-screen #theme-choices{grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px}#setup-screen .theme-choice{display:grid;grid-template-columns:84px minmax(0,1fr);min-height:74px;border-radius:9px}#setup-screen .theme-thumb{height:74px;min-height:74px;padding:6px 4px;gap:4px;justify-content:center;border-width:5px}#setup-screen .thumb-title{font-size:5px;padding:2px 4px;border-radius:3px}#setup-screen .thumb-letters{gap:3px}#setup-screen .thumb-letters b{height:21px;width:21px;font-size:15px;border-radius:4px;box-shadow:0 2px 0 #adc4dc}#setup-screen .thumb-next{font-size:5px;width:47px;padding:3px 0;border-radius:3px}#setup-screen .thumb-decoration{height:10px;width:10px;top:6px;left:5px}#setup-screen .theme-choice[data-theme=blackboard] .theme-thumb{padding:5px;gap:4px}#setup-screen .theme-caption{padding:9px;gap:4px;align-content:center}#setup-screen .theme-caption strong{font-size:12px}#setup-screen .theme-caption small{font-size:9px;line-height:1.5}#setup-screen .theme-selected{font-size:9px}#setup-screen .theme-preview-action{margin-top:13px;font-size:11px;gap:10px;flex-wrap:nowrap}#setup-screen .theme-preview-action>span{width:auto}#setup-screen .theme-try{width:auto;min-height:34px;font-size:11px;padding:8px 12px}#setup-screen .theme-help{font-size:10px;line-height:1.7;margin-top:9px}
+#setup-screen .img-item{padding:11px;border-radius:9px;margin-bottom:9px}#setup-screen .img-header{font-size:12px;gap:9px}#setup-screen .img-switch-label{min-height:32px;font-size:10px;padding:3px 8px}#setup-screen .img-content{margin-top:8px;padding-top:8px;gap:8px}
+#setup-screen .mobile-nav{padding:3px;margin-bottom:12px;border-radius:9px}#setup-screen .mobile-nav button{height:32px;font-size:11px;border-radius:6px}#setup-screen .action-area{padding:9px 20px calc(9px + env(safe-area-inset-bottom));gap:9px}#setup-screen .btn-save,#setup-screen .btn-start{min-height:38px;font-size:12px;padding:8px 17px;border-radius:8px}#setup-screen .btn-start{gap:25px}#setup-screen .btn-start span{font-size:18px}#setup-screen .footer-note{font-size:10px;gap:9px}#setup-screen .footer-note small{font-size:9px;margin-top:3px}#setup-screen .footer-symbol{font-size:23px}
+}
+@media(min-width:901px){#setup-screen .studio-layout{grid-template-columns:250px minmax(0,1fr)}}
+/* Adult buttons follow their one-line content; no reserved blank rows. */
+#setup-screen button,#setup-screen .btn-small-action{line-height:1.25}
+#setup-screen .rec-controls .btn-common{height:auto;min-height:0;line-height:1.25;font-size:11px;padding:3px 4px;white-space:nowrap}
+#setup-screen .rec-controls .btn-delete{height:auto;min-height:0;width:auto;line-height:1.2;font-size:9px;padding:3px;top:8px;right:6px}
+#setup-screen .rec-item{padding:7px;gap:6px}
+#setup-screen .rec-header{min-height:0;gap:4px}
+#setup-screen .rec-char{height:auto;min-height:0;min-width:27px;font-size:22px;line-height:1.2;padding:1px 4px}
+#setup-screen .rec-char.long-label{min-height:0;height:auto;font-size:11px;line-height:1.3;padding:3px 4px}
+#setup-screen .rec-status{line-height:1.2;margin-right:28px}
+#setup-screen .mobile-nav button{height:auto;min-height:0;padding:5px 6px;line-height:1.25}
+#setup-screen .asset-tabs button{height:auto;min-height:0;padding:11px 2px;line-height:1.25}
+#setup-screen .btn-small-action{height:auto;min-height:0;padding:5px 7px;font-size:11px;line-height:1.25}
+#setup-screen .btn-save,#setup-screen .btn-start{height:auto;min-height:0;padding:6px 10px;font-size:12px;line-height:1.3}
+#setup-screen .btn-start span{font-size:16px;line-height:1}
+#setup-screen .theme-try{height:auto;min-height:0;padding:5px 8px;line-height:1.25;font-size:11px}
+#setup-screen .slot-btn{height:auto;min-height:0;width:27px;padding:4px 3px;font-size:11px;line-height:1.2}
+#setup-screen .help-button{height:auto;min-height:0;min-width:25px;padding:5px 8px;font-size:11px;line-height:1.2}
+#setup-screen .img-switch-label{min-height:0;padding:3px 6px;line-height:1.25}
+@media(max-width:600px){
+#setup-screen .setup-header{height:50px;padding:6px 10px}#setup-screen .help-button{width:auto;padding:4px 6px}#setup-screen .brand-mark{height:28px;width:25px}
+#setup-screen .rec-controls .btn-common{padding:2px 3px;line-height:1.25;font-size:11px}#setup-screen .rec-controls .btn-delete{font-size:9px;padding:3px;line-height:1.2;top:8px;right:5px}
+#setup-screen .rec-char{font-size:20px;line-height:1.2;padding:1px 4px;min-width:26px}#setup-screen .rec-item{padding:6px;gap:5px}#setup-screen .rec-controls{gap:3px}
+#setup-screen .search-field{height:28px}#setup-screen .search-field input{padding:2px 4px;line-height:1.25}
+#setup-screen .theme-choice{min-height:0;grid-template-columns:75px minmax(0,1fr)}#setup-screen .theme-thumb{height:48px;min-height:0;padding:3px;gap:2px}#setup-screen .theme-choice[data-theme=blackboard] .theme-thumb{padding:2px;gap:2px}#setup-screen .thumb-title{padding:1px 3px;font-size:4px}#setup-screen .thumb-letters b{height:17px;width:17px;font-size:12px}#setup-screen .thumb-next{padding:1px 0;font-size:4px;width:43px}#setup-screen .theme-caption{padding:5px 8px;gap:2px}#setup-screen .theme-caption strong{font-size:11px}#setup-screen .theme-caption small{font-size:9px;line-height:1.4}
+#setup-screen .action-area{padding:7px 10px calc(7px + env(safe-area-inset-bottom))}
+}
+
+/* No extra word is added above a character unless the teacher explicitly enables it. */
+#app-screen:not([data-char-hint="on"]) .char-btn.current::before{content:none;display:none}
+#setup-screen .hint-option{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:11px;color:var(--ink);line-height:1.4;cursor:pointer;width:fit-content}
+#setup-screen .hint-option input{margin:0;width:15px;height:15px;flex-shrink:0}
+#setup-screen .hint-default{color:var(--muted);font-size:10px}
+#completion-screen{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:30px 10px;text-align:center}
+.completion-card{width:min(580px,100%);padding:42px 24px 44px;border-radius:30px;background:var(--stage-board);border:3px solid var(--stage-board-border);box-shadow:0 8px 0 var(--stage-shadow);color:var(--stage-title-ink)}
+.completion-mark{width:112px;height:112px;margin:0 auto 25px;display:grid;place-items:center;border:4px solid #fff;background:#ffe18a;border-radius:50%;box-shadow:0 5px 0 #d7b864}
+.completion-mark svg{width:64px;height:64px;color:#31584a}.completion-card h1{font-size:32px;line-height:1.6;font-weight:800;margin:0}.completion-card h1:focus{outline:none}.completion-card p{font-size:20px;line-height:1.8;margin-top:13px;font-weight:650}
+#app-screen[data-theme="blackboard"] .completion-card{color:#fffbea}
+@media(max-width:700px){#completion-screen{padding:20px 2px}.completion-card{padding:34px 16px 37px;border-radius:24px}.completion-card h1{font-size:24px}.completion-card p{font-size:17px;margin-top:9px}.completion-mark{width:90px;height:90px;margin-bottom:20px}.completion-mark svg{width:54px;height:54px}#setup-screen .hint-option{font-size:10px;margin-top:10px}#setup-screen .hint-default{font-size:9px}}
+@media(max-height:500px) and (orientation:landscape){.completion-card{padding:20px}.completion-mark{height:65px;width:65px;margin-bottom:12px}.completion-mark svg{height:40px;width:40px}.completion-card h1{font-size:24px}.completion-card p{font-size:16px;margin-top:7px}}
+
+.brand .brand-version{font-size:10px;font-weight:600;letter-spacing:0;color:var(--muted);vertical-align:middle}
+</style>
 </head>
 <body>
 
-    <!-- 設定画面 -->
     <div id="setup-screen">
-        <div class="setup-header">
-            <div class="header-top">
-                <h2>🎤 だれでもMC ~Ver2.2.3</h2>
-            </div>
-            <!-- スロットボタン -->
-            <div id="slot-container"></div>
+      <header class="setup-header">
+        <a class="brand" href="#" aria-label="だれでもMC v3.0 ホーム"><span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><rect x="11" y="3" width="10" height="17" rx="5" fill="currentColor"/><path d="M7 14v2a9 9 0 0 0 18 0v-2M16 25v5m-5 0h10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></span><span>だれでも<span class="brand-mc">MC</span><span class="brand-version"> v3.0</span></span></a>
+        <div class="slot-group"><span class="eyebrow">台本を切り替え</span><div id="slot-container" aria-label="保存した台本"></div></div>
+        <button class="help-button" onclick="document.getElementById('usage-guide').showModal()">? <span>使いかた</span></button>
+      </header>
+      <main class="setup-content">
+        <div class="workspace-heading"><div><span class="eyebrow">MC STUDIO</span><h1>司会のじゅんび</h1><p>台本を書いて、声を入れて。準備ができたら、さあ本番。</p></div><span class="preparation-tag"><i></i> 準備モード</span></div>
+        <nav class="mobile-nav" aria-label="編集する項目"><button onclick="showEditor('script')" data-editor="script">01 台本</button><button class="selected" onclick="showEditor('audio')" data-editor="audio">02 音声</button><button onclick="showEditor('images')" data-editor="images">03 画像</button><button onclick="showEditor('theme')" data-editor="theme">04 見た目</button></nav>
+        <div class="studio-layout" data-mobile-panel="audio" id="studio-layout">
+          <section class="script-panel panel">
+            <div class="panel-heading"><span class="step-number">01</span><div><h2>台本をつくる</h2><p>1行が、ひとつのページになります。</p></div></div>
+            <div class="script-label"><label for="config-text">いまの台本 <span id="current-slot-name">A</span></label><span id="page-count">0ページ</span></div>
+            <textarea id="config-text" placeholder="はじめのあいさつ:これから あさのかいを はじめます" oninput="updateLists()" aria-describedby="script-hint" spellcheck="false"></textarea>
+            <p class="field-hint" id="script-hint">「見出し：読むことば」の形でも書けます。<br>小さい「ゃ・ゅ・ょ」などは前の文字とまとまります。</p>
+            <div class="script-preview"><div class="eyebrow">ページのプレビュー</div><div id="page-preview"></div></div>
+            <div class="data-actions"><button class="btn-small-action btn-export" onclick="exportSlotData()">↓ 書き出す</button><label class="btn-small-action btn-import">↑ 読み込む<input type="file" accept=".json" onchange="importSlotData(this)" aria-label="台本のバックアップを読み込む"></label></div>
+            <p class="backup-hint">音声・画像ごとバックアップできます。</p>
+          </section>
+          <section class="assets-panel panel">
+            <div class="asset-tabs" role="tablist" aria-label="準備するもの"><button id="tab-audio" role="tab" aria-selected="true" aria-controls="audio-panel" onclick="showEditor('audio')"><span>02</span> 声をいれる <b id="audio-tab-count">0</b></button><button id="tab-images" role="tab" aria-selected="false" aria-controls="images-panel" onclick="showEditor('images')"><span>03</span> 画像をそえる</button><button id="tab-theme" role="tab" aria-selected="false" aria-controls="theme-panel" onclick="showEditor('theme')"><span>04</span> 見た目</button></div>
+            <section id="audio-panel" role="tabpanel" aria-labelledby="tab-audio">
+              <div class="audio-heading"><div><h2>ひと文字ずつ、あなたの声で。</h2><p>同じ文字は、一度の録音でどのページにも使えます。</p></div><div class="audio-total"><strong id="recorded-count">0</strong><span id="total-count">/ 0</span><small>音声の準備</small></div></div>
+              <div class="progress-track"><div id="recording-progress"></div></div>
+              <div class="audio-toolbar"><label class="search-field"><span aria-hidden="true">⌕</span><input id="char-search" type="search" placeholder="文字をさがす" oninput="refreshRecordingOverview()" aria-label="録音する文字を検索"></label><label class="missing-filter"><input type="checkbox" id="missing-only" onchange="refreshRecordingOverview()">未録音だけ</label><span id="visible-count"></span></div>
+              <div id="recording-area"></div><p id="audio-empty" class="empty-state" hidden></p>
+              <p class="audio-note"><span>✦</span> 録音した声の前後の無音は、自動でカットします。</p>
+            </section>
+            <section id="images-panel" role="tabpanel" aria-labelledby="tab-images" hidden><div class="audio-heading"><div><h2>ことばに、見える手がかりを。</h2><p>ページごとに写真やイラストを添えられます。</p></div></div><div id="image-settings-area"></div></section><section id="theme-panel" role="tabpanel" aria-labelledby="tab-theme" hidden><div class="audio-heading"><div><h2>この台本の、司会画面。</h2><p>授業や会に合わせて選べます。選んだ見た目は、台本と一緒に保存されます。</p></div></div><div id="theme-choices" role="radiogroup" aria-label="司会画面の見た目"></div><label class="hint-option"><input type="checkbox" id="show-char-hint" onchange="setCharHint(this.checked)"><span>文字の上に「ここ！」を表示する</span><span class="hint-default">初期値：オフ</span></label><div class="theme-preview-action"><span>いまの見た目：<strong id="current-theme-name">黒板</strong></span><button class="theme-try" onclick="startApp()">司会画面で確認する →</button></div><p class="theme-help">選んだら「台本に保存」を押してください。保存済みの台本は、それぞれ選んだ見た目で開きます。<br>以前の台本など、見た目が未設定の場合は「黒板」になります。</p></section>
+          </section>
         </div>
-        
-        <!-- スクロールエリア -->
-        <div class="setup-content">
-            <div class="instruction">
-                <strong>✨ 新機能：ガイドモード & 自動無音カット</strong><br>
-                ・左から順に1つずつボタンがピンク色に光ります。<br>
-                ・光っているボタンしか押せないので、迷わず操作できます。<br>
-                ・♪ボタンは押すたびに「初めから再生」と「停止」を繰り返せます。<br>
-                ・♪「君が代」のように、♪の後に曲名をカギカッコ「」で囲むと、その曲専用の横長ボタンになります。<br>
-                ・人の声の録音後は、前後の無音部分を自動でカットします。
-            
-            </div>
-            
-            <div class="section-title" id="sec-text">
-                <span>1. 台本 (現在: <span id="current-slot-name">未設定</span>)</span>
-                <div class="data-actions">
-                    <button class="btn-small-action btn-export" onclick="exportSlotData()">バックアップ</button>
-                    <button class="btn-small-action btn-import">
-                        ロード
-                        <input type="file" accept=".json" onchange="importSlotData(this)">
-                    </button>
-                </div>
-            </div>
-            <textarea id="config-text" placeholder="例：１　はじめのあいさつ" oninput="updateLists()"></textarea>
-
-            <!-- ジャンプナビ (1->2,3) -->
-            <div class="jump-nav">
-                <button class="btn-jump" onclick="document.getElementById('sec-rec').scrollIntoView({behavior: 'smooth'})">↓ 2.音声を録音 へ</button>
-                <button class="btn-jump" onclick="document.getElementById('sec-img').scrollIntoView({behavior: 'smooth'})">↓ 3.画像設定 へ</button>
-            </div>
-
-            <div class="section-title" id="sec-rec">2. 音声を録音</div>
-            <div id="recording-area"></div>
-
-            <!-- ジャンプナビ (2->1,3) -->
-            <div class="jump-nav">
-                <button class="btn-jump" onclick="document.getElementById('sec-text').scrollIntoView({behavior: 'smooth'})">↑ 1.台本 へ</button>
-                <button class="btn-jump" onclick="document.getElementById('sec-img').scrollIntoView({behavior: 'smooth'})">↓ 3.画像設定 へ</button>
-            </div>
-            
-            <div class="section-title" id="sec-img">3. ページの画像設定 (視覚支援)</div>
-            <div id="image-settings-area"></div>
-
-            <!-- ジャンプナビ (3->1,2) -->
-            <div class="jump-nav" style="margin-bottom: 30px;">
-                <button class="btn-jump" onclick="document.getElementById('sec-text').scrollIntoView({behavior: 'smooth'})">↑ 1.台本 へ</button>
-                <button class="btn-jump" onclick="document.getElementById('sec-rec').scrollIntoView({behavior: 'smooth'})">↑ 2.音声を録音 へ</button>
-            </div>
-
-            <div class="status-msg" id="status-msg"></div>
-        </div>
-
-        <!-- 固定アクションエリア -->
-        <div class="action-area">
-            <button class="btn-save" onclick="saveCurrentSlot()">💾 スロット<span id="save-btn-slot-label"></span>に保存</button>
-            <button class="btn-start" onclick="startApp()">これではじめる ▶</button>
-        </div>
+      </main>
+      <footer class="action-area"><div class="footer-note"><span class="footer-symbol">✧</span><span>ひとつずつ、じぶんのペースで。<small>本番では、次に押す文字が光ります。</small></span></div><button class="btn-save" onclick="saveCurrentSlot()">台本<span id="save-btn-slot-label">A</span> に保存</button><button class="btn-start" onclick="startApp()">司会をはじめる <span>→</span></button></footer>
+      <div class="status-msg" id="status-msg" role="status" aria-live="polite"></div>
     </div>
-
+    <dialog id="usage-guide"><form method="dialog"><button class="dialog-close" aria-label="使いかたを閉じる">×</button></form><span class="eyebrow">だれでもMC v3.0</span><h2>使いかた</h2><ol><li><strong>台本を書く</strong><p>1行が1ページ。「あいさつ：おはよう」のように、見出しと読む文字を分けられます。</p></li><li><strong>声を用意する</strong><p>文字カードの「録音」を押して話し、「停止」で完了。「読込」で音声・動画ファイルも使えます。</p></li><li><strong>保存して、はじめる</strong><p>光っている文字を順に押すと、その声が流れます。音声がない文字は音が出ないので、事前に確認してください。</p></li></ol><p>♪「曲名」と書くと音楽用のボタンになります。音楽は押すたびに再生・停止できます。</p><div class="guide-tip">設定に戻るには、画面の左右上端にある、大きな歯車の左半分と右半分を同時に押します。キーボードではスペースキー、または S キーでも戻れます。</div></dialog>
     <!-- アプリ画面 -->
     <div id="app-screen">
         
         <!-- 秘密の設定ボタン（左上角と右上角） -->
-        <div id="setting-btn-left" class="secret-setting-btn left">⚙</div>
-        <div id="setting-btn-right" class="secret-setting-btn right">⚙</div>
+        <div id="setting-btn-left" class="secret-setting-btn left" role="button" aria-label="設定の歯車の左半分（右半分と同時に押す）">⚙</div>
+        <div id="setting-btn-right" class="secret-setting-btn right" role="button" aria-label="設定の歯車の右半分（左半分と同時に押す）">⚙</div>
 
-        <div id="header-area">
-            <div id="agenda-title">タイトル</div>
+        <div class="stage-decoration" aria-hidden="true"><svg class="morning-sun" viewBox="0 0 100 100" fill="none"><circle cx="50" cy="50" r="24" fill="currentColor"/><path d="M50 5v9m0 72v9M5 50h9m72 0h9M18 18l7 7m50 50 7 7M18 82l7-7m50-50 7-7" stroke="currentColor" stroke-width="7" stroke-linecap="round"/></svg><span class="morning-cloud"></span></div><div id="header-area"><div class="stage-heading-label"><svg aria-hidden="true" viewBox="0 0 32 32" fill="none"><rect x="11" y="2" width="10" height="18" rx="5" fill="currentColor"/><path d="M6 14v3a10 10 0 0 0 20 0v-3M16 27v4m-5 0h10" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>きょうの しかい</div>
+            <div id="agenda-title">タイトル</div><span id="page-position"></span>
         </div>
         
         <!-- 画像表示エリア（ONのときだけ表示） -->
@@ -713,11 +809,12 @@
             <img id="page-image" src="" alt="視覚支援画像">
         </div>
 
-        <div id="char-container"></div>
+        <div class="stage-guide" id="stage-guide">ひかる もじを おしてね</div><div id="char-container" aria-label="読む文字"></div><div class="stage-progress-wrap" id="stage-progress-wrap"><div class="stage-meter" aria-hidden="true"><div id="stage-fill"></div></div><div class="stage-progress" id="stage-progress"></div></div>
         <div id="footer-nav">
             <button id="btn-prev" class="nav-btn" onclick="prevPage()">もどる</button>
             <button id="btn-next" class="nav-btn" onclick="nextPage()">つぎへ ▶</button>
         </div>
+        <section id="completion-screen" hidden aria-labelledby="completion-title"><div class="completion-card"><div class="completion-mark" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none"><path d="M15 33l11 11 24-26" stroke="currentColor" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h1 id="completion-title" tabindex="-1">おつかれさまでした</h1><p>しかい、ありがとう。</p></div></section>
     </div>
 
     <!-- カスタムモーダル -->
@@ -737,43 +834,41 @@
         // ==========================================
         // 秘密の設定ボタン（同時押しロック）処理
         // ==========================================
-        let isLeftPressed = false;
-        let isRightPressed = false;
-
-        function checkSecretSetting() {
-            if (isLeftPressed && isRightPressed) {
-                isLeftPressed = false;
-                isRightPressed = false;
-                goSetup();
-            }
-        }
-
+        // Each half needs its own actively held pointer; one touch is never enough.
+        const gearPointers = { left: null, right: null };
         const btnLeft = document.getElementById('setting-btn-left');
         const btnRight = document.getElementById('setting-btn-right');
-
-        if (btnLeft && btnRight) {
-            const pressLeft = (e) => { e.preventDefault(); isLeftPressed = true; checkSecretSetting(); };
-            const releaseLeft = (e) => { e.preventDefault(); isLeftPressed = false; };
-            
-            btnLeft.addEventListener('touchstart', pressLeft, {passive: false});
-            btnLeft.addEventListener('touchend', releaseLeft, {passive: false});
-            btnLeft.addEventListener('mousedown', pressLeft);
-            btnLeft.addEventListener('mouseup', releaseLeft);
-            btnLeft.addEventListener('mouseleave', releaseLeft);
-
-            const pressRight = (e) => { e.preventDefault(); isRightPressed = true; checkSecretSetting(); };
-            const releaseRight = (e) => { e.preventDefault(); isRightPressed = false; };
-
-            btnRight.addEventListener('touchstart', pressRight, {passive: false});
-            btnRight.addEventListener('touchend', releaseRight, {passive: false});
-            btnRight.addEventListener('mousedown', pressRight);
-            btnRight.addEventListener('mouseup', releaseRight);
-            btnRight.addEventListener('mouseleave', releaseRight);
+        function resetGearPresses() {
+            gearPointers.left = null;
+            gearPointers.right = null;
         }
+        for (const [side, button] of [['left', btnLeft], ['right', btnRight]]) {
+            if (!button) continue;
+            button.addEventListener('pointerdown', event => {
+                if (event.pointerType === 'mouse' && event.button !== 0) return;
+                event.preventDefault();
+                const otherSide = side === 'left' ? 'right' : 'left';
+                if (gearPointers[otherSide] === event.pointerId) return;
+                gearPointers[side] = event.pointerId;
+                button.setPointerCapture?.(event.pointerId);
+                if (gearPointers.left !== null && gearPointers.right !== null) {
+                    resetGearPresses();
+                    goSetup();
+                }
+            });
+            const release = event => {
+                if (gearPointers[side] === event.pointerId) gearPointers[side] = null;
+            };
+            button.addEventListener('pointerup', release);
+            button.addEventListener('pointercancel', release);
+            button.addEventListener('lostpointercapture', release);
+        }
+        window.addEventListener('blur', resetGearPresses);
+        document.addEventListener('visibilitychange', () => { if (document.hidden) resetGearPresses(); });
 
         document.addEventListener('keydown', (e) => {
             const appScreen = document.getElementById('app-screen');
-            if (appScreen && appScreen.style.display !== 'none') {
+            if (appScreen && getComputedStyle(appScreen).display !== 'none') {
                 if (e.key === 's' || e.key === 'S' || e.key === ' ' || e.code === 'Space') {
                     e.preventDefault(); 
                     goSetup();
@@ -913,13 +1008,15 @@
                 });
             },
 
-            saveSlot: async function(slotId, name, text, audioMap, imageMap) {
+            saveSlot: async function(slotId, name, text, audioMap, imageMap, theme = 'blackboard', showCharHint = false) {
                 const data = {
                     id: slotId,
                     name: name,
                     text: text,
                     audio: audioMap,
-                    images: imageMap || {}, 
+                    images: imageMap || {},
+                    theme: normalizeStageTheme(theme),
+                    showCharHint: showCharHint === true, 
                     updated: new Date()
                 };
                 if (!this.isSupported || !this.db) {
@@ -1069,6 +1166,8 @@
 
         let currentSlotId = 'slot_0';
         let currentSlotName = 'A';
+        let currentTheme = 'blackboard';
+        let currentShowCharHint = false;
         
         let audioBlobs = {}; 
         let pageImages = {}; 
@@ -1081,6 +1180,8 @@
         let currentPage = 0;
         let currentStepInPage = 0; 
         let mediaRecorder = null;
+        let recordingChar = null;
+        let recordingBusy = false;
         let audioChunks = [];
 
         let isExtracting = false;
@@ -1162,8 +1263,11 @@
             for (let i = 0; i < SLOT_COUNT; i++) {
                 const id = `slot_${i}`;
                 const meta = metaMap[id];
-                const btn = document.createElement('div');
+                const btn = document.createElement('button');
                 btn.className = 'slot-btn';
+                btn.type = 'button';
+                btn.setAttribute('aria-label', `台本 ${DEFAULT_LABELS[i]}：${meta?.name || '未保存'}`);
+                btn.setAttribute('aria-pressed', String(id === currentSlotId));
                 
                 let label = DEFAULT_LABELS[i];
                 if (meta && meta.name) {
@@ -1187,6 +1291,10 @@
         async function switchSlot(index) {
             currentSlotId = `slot_${index}`;
             const data = await StorageManager.loadSlot(currentSlotId);
+            currentTheme = normalizeStageTheme(data?.theme);
+            currentShowCharHint = data?.showCharHint === true;
+            applyStageTheme();
+            renderThemeChoices();
             const textEl = document.getElementById('config-text');
             const nameEl = document.getElementById('current-slot-name');
             const saveBtnLabel = document.getElementById('save-btn-slot-label');
@@ -1249,7 +1357,7 @@
             btn.innerHTML = '保存中...';
 
             try {
-                const success = await StorageManager.saveSlot(currentSlotId, newName, textEl ? textEl.value : '', audioBlobs, pageImages);
+                const success = await StorageManager.saveSlot(currentSlotId, newName, textEl ? textEl.value : '', audioBlobs, pageImages, currentTheme, currentShowCharHint);
                 if (success) {
                     showStatus('保存しました！');
                     currentSlotName = newName;
@@ -1295,7 +1403,9 @@
                 name: currentSlotName,
                 text: textEl ? textEl.value : '',
                 audio: {},
-                images: pageImages 
+                images: pageImages,
+                theme: currentTheme,
+                showCharHint: currentShowCharHint
             };
             for(const [key, blob] of Object.entries(audioBlobs)) {
                 exportData.audio[key] = await blobToBase64(blob);
@@ -1326,6 +1436,10 @@
             reader.onload = async (e) => {
                 try {
                     const data = JSON.parse(e.target.result);
+                    currentTheme = normalizeStageTheme(data.theme);
+                    currentShowCharHint = data.showCharHint === true;
+                    applyStageTheme();
+                    renderThemeChoices();
                     const textVal = data.text || "";
                     const textEl = document.getElementById('config-text');
                     if (textEl) textEl.value = textVal;
@@ -1356,7 +1470,7 @@
                         }
                     });
                     
-                    await StorageManager.saveSlot(currentSlotId, currentSlotName, textVal, audioBlobs, pageImages);
+                    await StorageManager.saveSlot(currentSlotId, currentSlotName, textVal, audioBlobs, pageImages, currentTheme, currentShowCharHint);
                     
                     preloadAllAudios(); 
                     
@@ -1380,7 +1494,9 @@
             const lines = text.split('\n');
             const uniqueSet = new Set();
             lines.forEach(line => {
-                const parts = line.replace('：', ':').split(':');
+                const normalized = line.replace('：', ':');
+                const separator = normalized.indexOf(':');
+                const parts = separator < 0 ? [normalized] : [normalized.slice(0, separator), normalized.slice(separator + 1)];
                 const content = parts[1] ? parts[1].trim() : (parts[0] ? parts[0].trim() : "");
                 if (!content) return;
                 const buttons = splitTextIntoButtons(content);
@@ -1394,6 +1510,8 @@
         function updateLists() {
             updateRecordingList();
             updateImageSettingsList();
+            refreshRecordingOverview();
+            refreshPagePreview();
         }
 
         function updateRecordingList() {
@@ -1410,7 +1528,7 @@
             });
 
             uniqueChars.forEach(char => {
-                let row = container.querySelector(`.rec-item[data-char="${char}"]`);
+                let row = Array.from(container.children).find(el => el.dataset.char === char);
                 if (!row) {
                     row = createRecRow(char);
                     container.appendChild(row);
@@ -1427,6 +1545,8 @@
             const playBtn = row.querySelector('.btn-play');
             const statusEl = row.querySelector('.rec-status');
             const hasAudio = !!audioBlobs[char];
+            row.classList.toggle('has-audio', hasAudio);
+            refreshRecordingOverview();
             
             if (playBtn) {
                 if (!isExtracting) {
@@ -1710,23 +1830,28 @@
             div.dataset.char = char;
             div.innerHTML = `
                 <div class="rec-header">
-                    <span class="rec-char">${char}</span>
+                    <span class="rec-char"></span>
                     <span class="rec-status">未録音</span>
                 </div>
                 <div class="rec-controls">
-                    <button class="btn-common btn-rec">🔴 録音</button>
+                    <button class="btn-common btn-rec"><span class="record-dot" aria-hidden="true"></span>録音</button>
                     <button class="btn-common btn-play" disabled>▶ 再生</button>
                     <button class="btn-common btn-file-load">
-                        📁 読込
+                        ↥ 読込
                         <input type="file" accept="audio/*, video/*, .m4a, .mp4, .mov, .mp3, .wav, audio/mp4, audio/x-m4a">
                     </button>
-                    <button class="btn-common btn-delete">🗑</button>
+                    <button class="btn-common btn-delete">消去</button>
                 </div>
             `;
+            div.querySelector('.rec-char').textContent = char;
+            div.querySelector('.rec-char').classList.toggle('long-label', Array.from(char).length > 2);
+            div.querySelectorAll('button').forEach(button => button.setAttribute('aria-label', `${char}：${button.textContent.trim()}`));
+            div.querySelector('input').setAttribute('aria-label', `${char} の音声ファイルを読み込む`);
             const recBtn = div.querySelector('.btn-rec');
             const playBtn = div.querySelector('.btn-play');
             const importInput = div.querySelector('input[type=file]');
             const delBtn = div.querySelector('.btn-delete');
+            delBtn.setAttribute('aria-label', `${char} の音声を削除`);
 
             recBtn.onclick = () => toggleRecording(char, recBtn, div);
             playBtn.onclick = () => previewAudio(char, playBtn); 
@@ -1840,6 +1965,11 @@
         }
 
         async function toggleRecording(char, btn, rowDiv) {
+            if (recordingBusy) return;
+            if (mediaRecorder?.state === 'recording' && recordingChar !== char) {
+                showStatus('録音中の文字を停止してから、次の文字を録音してください。');
+                return;
+            }
             if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
                 await showModal({ message: "録音機能が使えません。", type: "alert" });
                 return;
@@ -1852,14 +1982,17 @@
             }
 
             if (mediaRecorder && mediaRecorder.state === 'recording') {
+                recordingBusy = true;
                 mediaRecorder.stop();
-                btn.innerHTML = '🔴 録音';
+                btn.innerHTML = '<span class="record-dot" aria-hidden="true"></span>録音';
                 btn.classList.remove('recording');
                 showStatus('処理中...');
             } else {
                 stopAllAudio(); 
                 try {
+                    recordingBusy = true;
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    recordingChar = char;
                     const options = mimeType ? { mimeType } : undefined;
                     try { mediaRecorder = new MediaRecorder(stream, options); }
                     catch(e) { mediaRecorder = new MediaRecorder(stream); }
@@ -1896,11 +2029,19 @@
                             showStatus(`${char} を録音しました`);
                         }
                         stream.getTracks().forEach(track => track.stop());
+                        recordingBusy = false;
+                        recordingChar = null;
+                        setRecordingLock(false);
                     };
                     mediaRecorder.start();
+                    recordingBusy = false;
+                    setRecordingLock(true, btn);
                     btn.innerHTML = '■ 停止';
                     btn.classList.add('recording');
                 } catch (err) {
+                    recordingBusy = false;
+                    recordingChar = null;
+                    setRecordingLock(false);
                     await showModal({ message: 'マイクエラー: ' + err.message, type: "alert" });
                 }
             }
@@ -2016,7 +2157,9 @@
         }
 
         async function startApp() {
+            resetCompletionScreen();
             stopAllAudio(); 
+            applyStageTheme();
             initAudioContext();
             if (audioCtx.state === 'suspended') {
                 audioCtx.resume();
@@ -2033,9 +2176,12 @@
             updateDisplay();
             document.getElementById('setup-screen').style.display = 'none';
             document.getElementById('app-screen').style.display = 'flex';
+            document.getElementById('app-screen').scrollTop = 0;
+            document.querySelector('#char-container .current')?.focus({ preventScroll: true });
         }
 
         function goSetup() {
+            resetGearPresses();
             stopAllAudio();
             document.getElementById('app-screen').style.display = 'none';
             document.getElementById('setup-screen').style.display = 'flex';
@@ -2047,7 +2193,9 @@
             const result = [];
             lines.forEach(line => {
                 if (!line.trim()) return;
-                const parts = line.replace('：', ':').split(':');
+                const normalized = line.replace('：', ':');
+                const separator = normalized.indexOf(':');
+                const parts = separator < 0 ? [normalized] : [normalized.slice(0, separator), normalized.slice(separator + 1)];
                 const title = parts[0].trim();
                 const content = parts[1] ? parts[1].trim() : title;
                 result.push({ title: title, text: content });
@@ -2092,6 +2240,7 @@
             const currentData = pages[currentPage];
             const agendaTitle = document.getElementById('agenda-title');
             if (agendaTitle) agendaTitle.textContent = currentData.title;
+            document.getElementById('page-position').textContent = `${currentPage + 1} / ${pages.length}`;
             
             const container = document.getElementById('char-container');
             if (!container) return;
@@ -2105,6 +2254,10 @@
                 }
             });
             const validCount = validButtonIndices.length;
+            document.getElementById('stage-guide').textContent = currentStepInPage >= validCount ? 'よめたね！ つぎへ すすもう' : 'ひかる もじを おしてね';
+            document.getElementById('app-screen').classList.toggle('stage-complete', currentStepInPage >= validCount);
+            document.getElementById('stage-fill').style.width = (validCount ? Math.min(currentStepInPage, validCount) / validCount * 100 : 100) + '%';
+            document.getElementById('stage-progress').textContent = `${Math.min(currentStepInPage, validCount)} / ${validCount} もじ`;
 
             const imageArea = document.getElementById('image-area');
             const pageImage = document.getElementById('page-image');
@@ -2159,18 +2312,17 @@
                                     e.preventDefault();
                                     handlePress(btn, btnText, true, false); 
                                 };
-                                btn.addEventListener('touchstart', stopAction, {passive: false});
-                                btn.addEventListener('mousedown', (e) => handlePress(btn, btnText, true, false));
+                                btn.addEventListener('click', stopAction);
                             } else {
                                 const replayAction = (e) => {
                                     e.preventDefault();
                                     handlePress(btn, btnText, true, false);
                                 };
-                                btn.addEventListener('touchstart', replayAction, {passive: false});
-                                btn.addEventListener('mousedown', (e) => handlePress(btn, btnText, true, false));
+                                btn.addEventListener('click', replayAction);
                             }
                         } else {
                             btn.classList.add('done');
+                            btn.disabled = true;
                         }
                     } else if (validIndex === currentStepInPage) {
                         btn.classList.add('current');
@@ -2178,11 +2330,13 @@
                             e.preventDefault(); 
                             handlePress(btn, btnText, true, true);
                         };
-                        btn.addEventListener('touchstart', playAction, {passive: false});
-                        btn.addEventListener('mousedown', (e) => handlePress(btn, btnText, true, true));
+                        btn.addEventListener('click', playAction);
+                        btn.setAttribute('aria-label', `${btnText} を読む`);
+                        btn.setAttribute('aria-current', 'step');
                     } else {
                         btn.style.opacity = "0.5";
                         btn.style.cursor = "default";
+                        btn.disabled = true;
                     }
                 }
                 container.appendChild(btn);
@@ -2205,12 +2359,14 @@
         }
 
         function handlePress(btnElement, text, isValid, isCurrentStep) {
-            if (!isValid) return;
+            if (!isValid || (isCurrentStep && btnElement.dataset.processed)) return;
 
             if (text.includes('♪')) {
                 if (isCurrentStep && !btnElement.dataset.processed) {
                      btnElement.dataset.processed = "true";
-                     setTimeout(() => { 
+                     const pressedPage = currentPage;
+                    setTimeout(() => { 
+                        if (document.getElementById('app-screen').classList.contains('session-finished') || currentPage !== pressedPage) return;
                         currentStepInPage++;
                         updateDisplay();
                     }, 200);
@@ -2221,7 +2377,9 @@
             } else {
                 if (isCurrentStep && !btnElement.dataset.processed) {
                     btnElement.dataset.processed = "true";
+                    const pressedPage = currentPage;
                     setTimeout(() => { 
+                        if (document.getElementById('app-screen').classList.contains('session-finished') || currentPage !== pressedPage) return;
                         currentStepInPage++;
                         updateDisplay();
                     }, 500);
@@ -2236,6 +2394,8 @@
                 currentPage++; 
                 currentStepInPage = 0; 
                 updateDisplay(); 
+            } else {
+                finishApp();
             }
         }
 
@@ -2247,6 +2407,128 @@
                 updateDisplay(); 
             }
         }
+
+        function setRecordingLock(active, activeButton = null) {
+            document.querySelectorAll('#setup-screen button, #setup-screen input, #config-text').forEach(control => {
+                if (active) {
+                    control.dataset.recordingDisabled = String(control.disabled);
+                    control.disabled = control !== activeButton;
+                } else if ('recordingDisabled' in control.dataset) {
+                    control.disabled = control.dataset.recordingDisabled === 'true';
+                    delete control.dataset.recordingDisabled;
+                }
+            });
+            if (!active) updateLists();
+        }
+        function showEditor(panel) {
+            const asset = ['images', 'theme'].includes(panel) ? panel : 'audio';
+            document.getElementById('studio-layout').dataset.mobilePanel = panel;
+            for (const key of ['audio', 'images', 'theme']) {
+                document.getElementById(key + '-panel').hidden = key !== asset;
+                document.getElementById('tab-' + key).setAttribute('aria-selected', String(key === asset));
+            }
+            document.querySelectorAll('[data-editor]').forEach(b => b.classList.toggle('selected', b.dataset.editor === panel));
+        }
+        function refreshRecordingOverview() {
+            const rows = [...document.querySelectorAll('.rec-item')];
+            const query = document.getElementById('char-search').value.trim();
+            const missing = document.getElementById('missing-only').checked;
+            let ready = 0, visible = 0;
+            for (const row of rows) {
+                const hasAudio = !!audioBlobs[row.dataset.char];
+                if (hasAudio) ready++;
+                row.hidden = !row.dataset.char.includes(query) || (missing && hasAudio);
+                if (!row.hidden) visible++;
+            }
+            document.getElementById('recorded-count').textContent = ready;
+            document.getElementById('total-count').textContent = '/ ' + rows.length;
+            document.getElementById('audio-tab-count').textContent = rows.length;
+            document.getElementById('visible-count').textContent = visible + '文字';
+            document.getElementById('recording-progress').style.width = (rows.length ? ready / rows.length * 100 : 0) + '%';
+            const empty = document.getElementById('audio-empty');
+            empty.hidden = visible > 0;
+            empty.textContent = !rows.length ? '台本を書くと、ここに文字のカードが並びます。' : missing && ready === rows.length ? 'すべての文字に音声が入りました。準備完了です！' : '一致する文字がありません。検索条件を変えてみてください。';
+        }
+        function refreshPagePreview() {
+            const parsed = parseConfig(document.getElementById('config-text').value);
+            document.getElementById('page-count').textContent = parsed.length + 'ページ';
+            const container = document.getElementById('page-preview');
+            container.replaceChildren();
+            parsed.forEach((page, index) => {
+                const row = document.createElement('div'); row.className = 'preview-page';
+                const num = document.createElement('span'); num.textContent = String(index + 1).padStart(2, '0');
+                const title = document.createElement('span'); title.textContent = page.title;
+                const count = document.createElement('small'); count.textContent = splitTextIntoButtons(page.text).filter(c => c.trim()).length + '文字';
+                row.append(num, title, count); container.appendChild(row);
+            });
+        }
+        const STAGE_THEMES = [
+            {id:'blackboard', name:'黒板', description:'いつもの教室。時間帯を選ばず使えます。'},
+            {id:'morning', name:'朝の空', description:'空色と太陽。明るい朝の会に。'},
+            {id:'sunset', name:'夕やけ', description:'あたたかなオレンジ。帰りの会に。'},
+            {id:'notebook', name:'ノート', description:'白い紙と罫線。すっきり見やすく。'},
+            {id:'colorful', name:'カラフル', description:'明るい色と形。集会やお楽しみ会にも。'}
+        ];
+        function normalizeStageTheme(theme) {
+            return STAGE_THEMES.some(item => item.id === theme) ? theme : 'blackboard';
+        }
+        function applyStageTheme() {
+            document.getElementById('app-screen').dataset.theme = currentTheme;
+            document.getElementById('app-screen').dataset.charHint = currentShowCharHint ? 'on' : 'off';
+        }
+        function chooseStageTheme(theme) {
+            currentTheme = normalizeStageTheme(theme);
+            applyStageTheme();
+            renderThemeChoices();
+            document.querySelector('#theme-choices input[value="' + currentTheme + '"]')?.focus({ preventScroll: true });
+        }
+        function renderThemeChoices() {
+            const container = document.getElementById('theme-choices');
+            document.getElementById('show-char-hint').checked = currentShowCharHint;
+            if (!container) return;
+            container.replaceChildren();
+            for (const theme of STAGE_THEMES) {
+                const label = document.createElement('label');
+                label.className = 'theme-choice';
+                label.dataset.theme = theme.id;
+                const radio = document.createElement('input');
+                radio.type = 'radio'; radio.name = 'stage-theme'; radio.value = theme.id;
+                radio.checked = theme.id === currentTheme;
+                radio.setAttribute('aria-label', theme.name);
+                radio.onchange = () => chooseStageTheme(theme.id);
+                const thumb = document.createElement('span'); thumb.className = 'theme-thumb';
+                thumb.setAttribute('aria-hidden', 'true');
+                thumb.innerHTML = '<span class="thumb-decoration"></span><span class="thumb-title">はじめの あいさつ</span><span class="thumb-letters"><b>あ</b><b>い</b><b>う</b></span><span class="thumb-next">つぎへ ▶</span>';
+                const caption = document.createElement('span'); caption.className = 'theme-caption';
+                const name = document.createElement('strong'); name.textContent = theme.name;
+                const selected = document.createElement('span'); selected.className = 'theme-selected'; selected.textContent = theme.id === currentTheme ? '✓ 選択中' : '選ぶ';
+                const description = document.createElement('small'); description.textContent = theme.description;
+                caption.append(name, selected, description);
+                label.append(radio, thumb, caption); container.appendChild(label);
+            }
+            document.getElementById('current-theme-name').textContent = STAGE_THEMES.find(theme => theme.id === currentTheme).name;
+        }
+
+        const SESSION_CONTENT_IDS = ['header-area', 'image-area', 'stage-guide', 'char-container', 'stage-progress-wrap', 'footer-nav'];
+        function resetCompletionScreen() {
+            document.getElementById('app-screen').classList.remove('session-finished');
+            document.getElementById('completion-screen').hidden = true;
+            for (const id of SESSION_CONTENT_IDS) document.getElementById(id).hidden = false;
+        }
+        function finishApp() {
+            stopAllAudio();
+            resetGearPresses();
+            const screen = document.getElementById('app-screen');
+            screen.classList.add('session-finished');
+            for (const id of SESSION_CONTENT_IDS) document.getElementById(id).hidden = true;
+            document.getElementById('completion-screen').hidden = false;
+            document.getElementById('completion-title').focus({preventScroll:true});
+        }
+        function setCharHint(enabled) {
+            currentShowCharHint = enabled === true;
+            applyStageTheme();
+        }
+
     </script>
 </body>
 </html>
